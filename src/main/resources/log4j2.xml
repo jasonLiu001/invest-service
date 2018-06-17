@@ -45,7 +45,7 @@
     </Appenders>
     <Loggers>
         <!--单独指定 cn.lands.liuwang.investservice 包下的日志输出方式-->
-        <Logger name="cn.lands.liuwang.investservice" level="info" additivity="false">
+        <Logger name="cn.lands.liuwang" level="info" additivity="false">
             <!--单独输出error错误到单独文件-->
             <AppenderRef ref="ErrorFileAppender" level="error"/>
             <!--输出所有日志到文件-->

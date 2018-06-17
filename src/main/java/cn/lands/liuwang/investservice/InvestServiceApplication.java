@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages = "cn.lands.liuwang.investservice")
+@SpringBootApplication(scanBasePackages = "cn.lands.liuwang")
 public class InvestServiceApplication {
     private static final Logger logger = LogManager.getLogger(InvestServiceApplication.class);
 

@@ -23,48 +23,85 @@ public class ApiController extends BaseController {
     @RequestMapping(value = "/findAwardInfoList", method = RequestMethod.POST)
     public JsonResult findAwardInfoList(@Valid @RequestBody QueryListParam listParam, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
-        List<AwardInfo> list = awardService.findAwardInfoList(listParam.getPageIndex(), listParam.getPageSize());
-        jsonResult.setData(list);
+        try {
+            List<AwardInfo> list = awardService.findAwardInfoList(listParam.getPageIndex(), listParam.getPageSize());
+            jsonResult.setData(list);
+        } catch (Exception ex) {
+            jsonResult.setStatus(JsonStatus.FAILED);
+            jsonResult.setMessage(ex.getMessage());
+            logger.error(ex);
+        }
         return jsonResult;
     }
 
     @RequestMapping(value = "findInvestInfoList", method = RequestMethod.POST)
     public JsonResult findInvestInfoList(@Valid @RequestBody QueryListParam listParam, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
-        List<InvestInfo> list = investService.findInvestInfoList(listParam.getPageIndex(), listParam.getPageSize());
-        jsonResult.setData(list);
+        try {
+            List<InvestInfo> list = investService.findInvestInfoList(listParam.getPageIndex(), listParam.getPageSize());
+            jsonResult.setData(list);
+        } catch (Exception ex) {
+            jsonResult.setStatus(JsonStatus.FAILED);
+            jsonResult.setMessage(ex.getMessage());
+            logger.error(ex);
+        }
+
         return jsonResult;
     }
 
     @RequestMapping(value = "findMaxProfitInfoList", method = RequestMethod.POST)
     public JsonResult findMaxProfitInfoList(@Valid @RequestBody QueryListParam listParam, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
-        List<MaxProfitInfo> list = maxProfitService.findMaxProfitInfoList(listParam.getPageIndex(), listParam.getPageSize());
-        jsonResult.setData(list);
+        try {
+            List<MaxProfitInfo> list = maxProfitService.findMaxProfitInfoList(listParam.getPageIndex(), listParam.getPageSize());
+            jsonResult.setData(list);
+        } catch (Exception ex) {
+            jsonResult.setStatus(JsonStatus.FAILED);
+            jsonResult.setMessage(ex.getMessage());
+            logger.error(ex);
+        }
         return jsonResult;
     }
 
     @RequestMapping(value = "findPlanInfoList", method = RequestMethod.POST)
     public JsonResult findPlanInfoList(@Valid @RequestBody QueryListParam listParam, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
-        List<PlanInfo> list = planService.findPlanInfoList(listParam.getPageIndex(), listParam.getPageSize());
-        jsonResult.setData(list);
+        try {
+            List<PlanInfo> list = planService.findPlanInfoList(listParam.getPageIndex(), listParam.getPageSize());
+            jsonResult.setData(list);
+        } catch (Exception ex) {
+            jsonResult.setStatus(JsonStatus.FAILED);
+            jsonResult.setMessage(ex.getMessage());
+            logger.error(ex);
+        }
         return jsonResult;
     }
 
     @RequestMapping(value = "findPlanResultInfoList", method = RequestMethod.POST)
     public JsonResult findPlanResultInfoList(@Valid @RequestBody QueryListParam listParam, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
-        List<PlanResultInfo> list = planResultService.findPlanResultInfoList(listParam.getPageIndex(), listParam.getPageSize());
-        jsonResult.setData(list);
+        try {
+            List<PlanResultInfo> list = planResultService.findPlanResultInfoList(listParam.getPageIndex(), listParam.getPageSize());
+            jsonResult.setData(list);
+        } catch (Exception ex) {
+            jsonResult.setStatus(JsonStatus.FAILED);
+            jsonResult.setMessage(ex.getMessage());
+            logger.error(ex);
+        }
         return jsonResult;
     }
 
     @RequestMapping(value = "findInvestNumbersInfoList", method = RequestMethod.POST)
     public JsonResult findInvestNumbersInfoList(@Valid @RequestBody QueryListParam listParam, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
-        List<PlanInvestNumberInfo> list = planInvestNumbersService.findInvestNumbersInfoList(listParam.getPageIndex(), listParam.getPageSize());
-        jsonResult.setData(list);
+        try {
+            List<PlanInvestNumberInfo> list = planInvestNumbersService.findInvestNumbersInfoList(listParam.getPageIndex(), listParam.getPageSize());
+            jsonResult.setData(list);
+        } catch (Exception ex) {
+            jsonResult.setStatus(JsonStatus.FAILED);
+            jsonResult.setMessage(ex.getMessage());
+            logger.error(ex);
+        }
         return jsonResult;
     }
 }

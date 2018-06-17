@@ -3,7 +3,7 @@ package cn.lands.liuwang.investservice.model.query;
 /**
  * 开奖号码查询参数
  */
-public class QueryAwardParam {
+public class QueryListParam {
     private int pageIndex;
     private int pageSize;
 

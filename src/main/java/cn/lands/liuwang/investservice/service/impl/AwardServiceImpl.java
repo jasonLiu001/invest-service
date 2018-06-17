@@ -11,9 +11,6 @@ import java.util.List;
 
 @Service
 public class AwardServiceImpl extends BaseService implements AwardService {
-    @Autowired
-    AwardDao awardDao;
-
     /**
      * 查询开奖号码
      */

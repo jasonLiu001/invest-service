@@ -1,10 +1,11 @@
 package cn.lands.liuwang.investservice.controller;
 
 import cn.lands.liuwang.investservice.model.AwardInfo;
-import cn.lands.liuwang.investservice.model.MaxProfit;
+import cn.lands.liuwang.investservice.model.InvestInfo;
+import cn.lands.liuwang.investservice.model.MaxProfitInfo;
 import cn.lands.liuwang.investservice.model.query.JsonResult;
 import cn.lands.liuwang.investservice.model.query.JsonStatus;
-import cn.lands.liuwang.investservice.model.query.QueryAwardParam;
+import cn.lands.liuwang.investservice.model.query.QueryListParam;
 import cn.lands.liuwang.investservice.service.AwardService;
 import cn.lands.liuwang.investservice.service.InvestService;
 import cn.lands.liuwang.investservice.service.MaxProfitService;
@@ -32,9 +33,25 @@ public class ApiController {
     MaxProfitService maxProfitService;
 
     @RequestMapping(value = "/findAwardInfoList", method = RequestMethod.POST)
-    public JsonResult findAwardInfoList(@Valid @RequestBody QueryAwardParam awardParam, BindingResult bindingResult) {
+    public JsonResult findAwardInfoList(@Valid @RequestBody QueryListParam listParam, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
-        List<AwardInfo> list = awardService.findAwardInfoList(awardParam.getPageIndex(), awardParam.getPageSize());
+        List<AwardInfo> list = awardService.findAwardInfoList(listParam.getPageIndex(), listParam.getPageSize());
+        jsonResult.setData(list);
+        return jsonResult;
+    }
+
+    @RequestMapping(value = "findInvestInfoList", method = RequestMethod.POST)
+    public JsonResult findInvestInfoList(@Valid @RequestBody QueryListParam listParam, BindingResult bindingResult) {
+        JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
+        List<InvestInfo> list = investService.findInvestInfoList(listParam.getPageIndex(), listParam.getPageSize());
+        jsonResult.setData(list);
+        return jsonResult;
+    }
+
+    @RequestMapping(value = "findMaxProfitInfoList", method = RequestMethod.POST)
+    public JsonResult findMaxProfitInfoList(@Valid @RequestBody QueryListParam listParam, BindingResult bindingResult) {
+        JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
+        List<MaxProfitInfo> list = maxProfitService.findMaxProfitInfoList(listParam.getPageIndex(), listParam.getPageSize());
         jsonResult.setData(list);
         return jsonResult;
     }

@@ -18,7 +18,7 @@ public class AwardServiceImpl extends BaseService implements AwardService {
      * 查询开奖号码
      */
     @Override
-    public List<AwardInfo> findAwardInfoList(int pageSize, int pageIndex) {
-        return awardDao.findAwardInfoList(pageSize, pageIndex);
+    public List<AwardInfo> findAwardInfoList(int pageIndex, int pageSize) {
+        return awardDao.findAwardInfoList(pageIndex, pageSize);
     }
 }

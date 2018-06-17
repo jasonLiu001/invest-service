@@ -8,5 +8,5 @@ public interface AwardService {
     /**
      * 查询开奖号码
      */
-    List<AwardInfo> findAwardInfoList(int pageSize, int pageIndex);
+    List<AwardInfo> findAwardInfoList(int pageIndex, int pageSize);
 }

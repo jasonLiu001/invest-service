@@ -1,8 +1,6 @@
 package cn.lands.liuwang.investservice.service;
 
-import cn.lands.liuwang.investservice.dao.AwardDao;
-import cn.lands.liuwang.investservice.dao.InvestDao;
-import cn.lands.liuwang.investservice.dao.MaxProfitDao;
+import cn.lands.liuwang.investservice.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class BaseService {
@@ -14,4 +12,13 @@ public class BaseService {
 
     @Autowired
     protected MaxProfitDao maxProfitDao;
+
+    @Autowired
+    protected PlanDao planDao;
+
+    @Autowired
+    protected PlanInvestNumbersDao planInvestNumbersDao;
+
+    @Autowired
+    protected PlanResultDao planResultDao;
 }

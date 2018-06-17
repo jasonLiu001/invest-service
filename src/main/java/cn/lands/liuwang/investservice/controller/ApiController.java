@@ -1,8 +1,6 @@
 package cn.lands.liuwang.investservice.controller;
 
-import cn.lands.liuwang.investservice.model.AwardInfo;
-import cn.lands.liuwang.investservice.model.InvestInfo;
-import cn.lands.liuwang.investservice.model.MaxProfitInfo;
+import cn.lands.liuwang.investservice.model.*;
 import cn.lands.liuwang.investservice.model.query.JsonResult;
 import cn.lands.liuwang.investservice.model.query.JsonStatus;
 import cn.lands.liuwang.investservice.model.query.QueryListParam;
@@ -21,17 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/lottery")
-public class ApiController {
-
-    @Autowired
-    AwardService awardService;
-
-    @Autowired
-    InvestService investService;
-
-    @Autowired
-    MaxProfitService maxProfitService;
-
+public class ApiController extends BaseController {
     @RequestMapping(value = "/findAwardInfoList", method = RequestMethod.POST)
     public JsonResult findAwardInfoList(@Valid @RequestBody QueryListParam listParam, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
@@ -52,6 +40,30 @@ public class ApiController {
     public JsonResult findMaxProfitInfoList(@Valid @RequestBody QueryListParam listParam, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         List<MaxProfitInfo> list = maxProfitService.findMaxProfitInfoList(listParam.getPageIndex(), listParam.getPageSize());
+        jsonResult.setData(list);
+        return jsonResult;
+    }
+
+    @RequestMapping(value = "findPlanInfoList", method = RequestMethod.POST)
+    public JsonResult findPlanInfoList(@Valid @RequestBody QueryListParam listParam, BindingResult bindingResult) {
+        JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
+        List<PlanInfo> list = planService.findPlanInfoList(listParam.getPageIndex(), listParam.getPageSize());
+        jsonResult.setData(list);
+        return jsonResult;
+    }
+
+    @RequestMapping(value = "findPlanResultInfoList", method = RequestMethod.POST)
+    public JsonResult findPlanResultInfoList(@Valid @RequestBody QueryListParam listParam, BindingResult bindingResult) {
+        JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
+        List<PlanResultInfo> list = planResultService.findPlanResultInfoList(listParam.getPageIndex(), listParam.getPageSize());
+        jsonResult.setData(list);
+        return jsonResult;
+    }
+
+    @RequestMapping(value = "findInvestNumbersInfoList", method = RequestMethod.POST)
+    public JsonResult findInvestNumbersInfoList(@Valid @RequestBody QueryListParam listParam, BindingResult bindingResult) {
+        JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
+        List<PlanInvestNumberInfo> list = planInvestNumbersService.findInvestNumbersInfoList(listParam.getPageIndex(), listParam.getPageSize());
         jsonResult.setData(list);
         return jsonResult;
     }

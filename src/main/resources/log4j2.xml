@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="30" status="WARN">
+    <Properties>
+        <Property name="LOG_PATTERN">
+            %d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} --- [%15.15t] %-40.40c{1.} : %m%n%ex
+        </Property>
+    </Properties>
+    <Appenders>
+        <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+
+        <!-- ALL Logs Appender-->
+        <RollingFile name="FileAppender" fileName="logs/invest-service.log"
+                     filePattern="logs/invest-service-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <!--日志文件大于10M时，自动创建新的日志文件-->
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+                <!--每天创建新的日志文件 filePattern中文件格式对应为%d{yyyy-MM-dd}-->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <!-- logs目录下最多存放30个日志文件，多余的自动删除-->
+            <DefaultRolloverStrategy max="30"/>
+        </RollingFile>
+
+        <!-- Error Appender -->
+        <RollingFile name="ErrorFileAppender" fileName="logs/invest-service-error.log"
+                     filePattern="logs/invest-service-error-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <!--日志文件大于10M时，自动创建新的日志文件-->
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+                <!--每天创建新的日志文件 filePattern中文件格式对应为%d{yyyy-MM-dd}-->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <!-- logs目录下最多存放30个日志文件，多余的自动删除-->
+            <DefaultRolloverStrategy max="30"/>
+        </RollingFile>
+
+    </Appenders>
+    <Loggers>
+        <!--单独指定 cn.lands.liuwang.investservice 包下的日志输出方式-->
+        <Logger name="cn.lands.liuwang.investservice" level="info" additivity="false">
+            <!--单独输出error错误到单独文件-->
+            <AppenderRef ref="ErrorFileAppender" level="error"/>
+            <!--输出所有日志到文件-->
+            <AppenderRef ref="FileAppender" level="info"/>
+            <!--输出所有日志到Console-->
+            <!--<AppenderRef ref="ConsoleAppender" level="info"/>-->
+        </Logger>
+
+        <Root level="info">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="FileAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>

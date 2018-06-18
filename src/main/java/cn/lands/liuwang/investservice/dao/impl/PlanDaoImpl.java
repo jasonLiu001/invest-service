@@ -12,7 +12,7 @@ import java.util.List;
 public class PlanDaoImpl extends BaseDao implements PlanDao {
     @Override
     public List<PlanInfo> findPlanInfoList(int pageIndex, int pageSize) {
-        List<PlanInfo> list = rewardJdbcTemplate.query("SELECT * FROM `plan` ORDER BY period DESC LIMIT ?,?;", new Object[]{pageIndex - 1, pageSize}, new BeanPropertyRowMapper<>(PlanInfo.class));
+        List<PlanInfo> list = rewardJdbcTemplate.query("SELECT * FROM `plan` ORDER BY period DESC LIMIT ?,?;", new Object[]{(pageIndex - 1) * pageSize, pageSize}, new BeanPropertyRowMapper<>(PlanInfo.class));
         if (list.size() > 0) {
             return list;
         } else {

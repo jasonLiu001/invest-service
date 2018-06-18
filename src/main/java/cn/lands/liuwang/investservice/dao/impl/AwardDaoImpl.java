@@ -16,7 +16,7 @@ public class AwardDaoImpl extends BaseDao implements AwardDao {
      */
     @Override
     public List<AwardInfo> findAwardInfoList(int pageIndex, int pageSize) {
-        List<AwardInfo> list = rewardJdbcTemplate.query("SELECT * FROM `award` ORDER BY period DESC LIMIT ?,?;", new Object[]{pageIndex - 1, pageSize}, new BeanPropertyRowMapper<>(AwardInfo.class));
+        List<AwardInfo> list = rewardJdbcTemplate.query("SELECT * FROM `award` ORDER BY period DESC LIMIT ?,?;", new Object[]{(pageIndex - 1) * pageSize, pageSize}, new BeanPropertyRowMapper<>(AwardInfo.class));
         if (list.size() > 0) {
             return list;
         } else {

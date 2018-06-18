@@ -16,7 +16,7 @@ public class InvestDaoImpl extends BaseDao implements InvestDao {
      */
     @Override
     public List<InvestInfo> findInvestInfoList(int pageIndex, int pageSize) {
-        List<InvestInfo> list = rewardJdbcTemplate.query("SELECT * FROM `invest` ORDER BY period DESC LIMIT ?,?;", new Object[]{pageIndex - 1, pageSize}, new BeanPropertyRowMapper<>(InvestInfo.class));
+        List<InvestInfo> list = rewardJdbcTemplate.query("SELECT * FROM `invest` ORDER BY period DESC LIMIT ?,?;", new Object[]{(pageIndex - 1) * pageSize, pageSize}, new BeanPropertyRowMapper<>(InvestInfo.class));
         if (list.size() > 0) {
             return list;
         } else {

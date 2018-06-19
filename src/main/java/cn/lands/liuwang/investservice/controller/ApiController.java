@@ -21,7 +21,7 @@ import java.util.List;
 @RequestMapping("/lottery")
 public class ApiController extends BaseController {
     @RequestMapping(value = "/findAwardInfoList", method = RequestMethod.POST)
-    public JsonResult findAwardInfoList(@Valid @RequestBody QueryListParam listParam, BindingResult bindingResult) {
+    public JsonResult findAwardInfoList(@Valid QueryListParam listParam, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         try {
             List<AwardInfo> list = awardService.findAwardInfoList(listParam.getPageIndex(), listParam.getPageSize());
@@ -35,7 +35,7 @@ public class ApiController extends BaseController {
     }
 
     @RequestMapping(value = "findInvestInfoList", method = RequestMethod.POST)
-    public JsonResult findInvestInfoList(@Valid @RequestBody QueryListParam listParam, BindingResult bindingResult) {
+    public JsonResult findInvestInfoList(@Valid QueryListParam listParam, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         try {
             List<InvestInfo> list = investService.findInvestInfoList(listParam.getPageIndex(), listParam.getPageSize());
@@ -50,7 +50,7 @@ public class ApiController extends BaseController {
     }
 
     @RequestMapping(value = "findMaxProfitInfoList", method = RequestMethod.POST)
-    public JsonResult findMaxProfitInfoList(@Valid @RequestBody QueryListParam listParam, BindingResult bindingResult) {
+    public JsonResult findMaxProfitInfoList(@Valid QueryListParam listParam, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         try {
             List<MaxProfitInfo> list = maxProfitService.findMaxProfitInfoList(listParam.getPageIndex(), listParam.getPageSize());
@@ -64,7 +64,7 @@ public class ApiController extends BaseController {
     }
 
     @RequestMapping(value = "findPlanInfoList", method = RequestMethod.POST)
-    public JsonResult findPlanInfoList(@Valid @RequestBody QueryListParam listParam, BindingResult bindingResult) {
+    public JsonResult findPlanInfoList(@Valid QueryListParam listParam, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         try {
             List<PlanInfo> list = planService.findPlanInfoList(listParam.getPageIndex(), listParam.getPageSize());
@@ -78,7 +78,7 @@ public class ApiController extends BaseController {
     }
 
     @RequestMapping(value = "findPlanResultInfoList", method = RequestMethod.POST)
-    public JsonResult findPlanResultInfoList(@Valid @RequestBody QueryListParam listParam, BindingResult bindingResult) {
+    public JsonResult findPlanResultInfoList(@Valid QueryListParam listParam, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         try {
             List<PlanResultInfo> list = planResultService.findPlanResultInfoList(listParam.getPageIndex(), listParam.getPageSize());
@@ -92,7 +92,7 @@ public class ApiController extends BaseController {
     }
 
     @RequestMapping(value = "findInvestNumbersInfoList", method = RequestMethod.POST)
-    public JsonResult findInvestNumbersInfoList(@Valid @RequestBody QueryListParam listParam, BindingResult bindingResult) {
+    public JsonResult findInvestNumbersInfoList(@Valid QueryListParam listParam, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         try {
             List<PlanInvestNumberInfo> list = planInvestNumbersService.findInvestNumbersInfoList(listParam.getPageIndex(), listParam.getPageSize());

@@ -38,7 +38,7 @@ public class ApiController extends BaseController {
     public JsonResult findInvestInfoList(@Valid QueryListParam listParam, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         try {
-            List<InvestInfo> list = investService.findInvestInfoList(listParam.getPageIndex(), listParam.getPageSize());
+            List<InvestInfo> list = investService.findInvestInfoList(listParam.getPageIndex(), listParam.getPageSize(), listParam.getPlanType());
             jsonResult.setData(list);
         } catch (Exception ex) {
             jsonResult.setStatus(JsonStatus.FAILED);
@@ -53,7 +53,7 @@ public class ApiController extends BaseController {
     public JsonResult findMaxProfitInfoList(@Valid QueryListParam listParam, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         try {
-            List<MaxProfitInfo> list = maxProfitService.findMaxProfitInfoList(listParam.getPageIndex(), listParam.getPageSize());
+            List<MaxProfitInfo> list = maxProfitService.findMaxProfitInfoList(listParam.getPageIndex(), listParam.getPageSize(), listParam.getPlanType());
             jsonResult.setData(list);
         } catch (Exception ex) {
             jsonResult.setStatus(JsonStatus.FAILED);
@@ -67,7 +67,7 @@ public class ApiController extends BaseController {
     public JsonResult findPlanInfoList(@Valid QueryListParam listParam, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         try {
-            List<PlanInfo> list = planService.findPlanInfoList(listParam.getPageIndex(), listParam.getPageSize());
+            List<PlanInfo> list = planService.findPlanInfoList(listParam.getPageIndex(), listParam.getPageSize(), listParam.getPlanType());
             jsonResult.setData(list);
         } catch (Exception ex) {
             jsonResult.setStatus(JsonStatus.FAILED);
@@ -81,7 +81,7 @@ public class ApiController extends BaseController {
     public JsonResult findPlanResultInfoList(@Valid QueryListParam listParam, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         try {
-            List<PlanResultInfo> list = planResultService.findPlanResultInfoList(listParam.getPageIndex(), listParam.getPageSize());
+            List<PlanResultInfo> list = planResultService.findPlanResultInfoList(listParam.getPageIndex(), listParam.getPageSize(), listParam.getPlanType());
             jsonResult.setData(list);
         } catch (Exception ex) {
             jsonResult.setStatus(JsonStatus.FAILED);
@@ -95,7 +95,7 @@ public class ApiController extends BaseController {
     public JsonResult findInvestNumbersInfoList(@Valid QueryListParam listParam, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         try {
-            List<PlanInvestNumberInfo> list = planInvestNumbersService.findInvestNumbersInfoList(listParam.getPageIndex(), listParam.getPageSize());
+            List<PlanInvestNumberInfo> list = planInvestNumbersService.findInvestNumbersInfoList(listParam.getPageIndex(), listParam.getPageSize(), listParam.getPlanType());
             jsonResult.setData(list);
         } catch (Exception ex) {
             jsonResult.setStatus(JsonStatus.FAILED);

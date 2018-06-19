@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class PlanServiceImpl extends BaseService implements PlanService {
     @Override
-    public List<PlanInfo> findPlanInfoList(int pageIndex, int pageSize) {
-        return planDao.findPlanInfoList(pageIndex,pageSize);
+    public List<PlanInfo> findPlanInfoList(int pageIndex, int pageSize, int planType) {
+        return planDao.findPlanInfoList(pageIndex, pageSize, planType);
     }
 }

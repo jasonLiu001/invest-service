@@ -11,7 +11,7 @@ import java.util.List;
 public class MaxProfitServiceImpl extends BaseService implements MaxProfitService {
 
     @Override
-    public List<MaxProfitInfo> findMaxProfitInfoList(int pageIndex, int pageSize) {
-        return maxProfitDao.findMaxProfitInfoList(pageIndex, pageSize);
+    public List<MaxProfitInfo> findMaxProfitInfoList(int pageIndex, int pageSize, int planType) {
+        return maxProfitDao.findMaxProfitInfoList(pageIndex, pageSize, planType);
     }
 }

@@ -8,5 +8,5 @@ public interface InvestService {
     /**
      * 查询投注记录
      */
-    List<InvestInfo> findInvestInfoList(int pageIndex, int pageSize);
+    List<InvestInfo> findInvestInfoList(int pageIndex, int pageSize, int planType);
 }

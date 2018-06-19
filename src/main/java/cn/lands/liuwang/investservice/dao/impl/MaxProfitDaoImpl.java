@@ -14,8 +14,8 @@ public class MaxProfitDaoImpl extends BaseDao implements MaxProfitDao {
      * 查询最大利润列表
      */
     @Override
-    public List<MaxProfitInfo> findMaxProfitInfoList(int pageIndex, int pageSize) {
-        List<MaxProfitInfo> list = rewardJdbcTemplate.query("SELECT * FROM `max_profit` ORDER BY period DESC LIMIT ?,?;", new Object[]{(pageIndex - 1) * pageSize, pageSize}, new BeanPropertyRowMapper<>(MaxProfitInfo.class));
+    public List<MaxProfitInfo> findMaxProfitInfoList(int pageIndex, int pageSize, int planType) {
+        List<MaxProfitInfo> list = rewardJdbcTemplate.query("SELECT * FROM `max_profit` WHERE planType=? ORDER BY period DESC LIMIT ?,?;", new Object[]{planType, (pageIndex - 1) * pageSize, pageSize}, new BeanPropertyRowMapper<>(MaxProfitInfo.class));
         if (list.size() > 0) {
             return list;
         } else {

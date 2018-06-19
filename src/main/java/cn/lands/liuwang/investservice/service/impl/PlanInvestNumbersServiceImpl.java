@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class PlanInvestNumbersServiceImpl extends BaseService implements PlanInvestNumbersService {
     @Override
-    public List<PlanInvestNumberInfo> findInvestNumbersInfoList(int pageIndex, int pageSize) {
-        return planInvestNumbersDao.findInvestNumbersInfoList(pageIndex,pageSize);
+    public List<PlanInvestNumberInfo> findInvestNumbersInfoList(int pageIndex, int pageSize, int planType) {
+        return planInvestNumbersDao.findInvestNumbersInfoList(pageIndex, pageSize, planType);
     }
 }

@@ -6,6 +6,7 @@ package cn.lands.liuwang.investservice.model.query;
 public class QueryListParam {
     private int pageIndex;
     private int pageSize;
+    private int planType;
 
     public int getPageIndex() {
         return pageIndex;
@@ -21,5 +22,13 @@ public class QueryListParam {
 
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public int getPlanType() {
+        return planType;
+    }
+
+    public void setPlanType(int planType) {
+        this.planType = planType;
     }
 }

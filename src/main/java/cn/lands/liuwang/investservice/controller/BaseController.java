@@ -26,5 +26,8 @@ public class BaseController {
     @Autowired
     protected PlanInvestNumbersService planInvestNumbersService;
 
+    @Autowired
+    protected SettingsService settingsService;
+
     protected final Logger logger = LogManager.getLogger(this.getClass());
 }

@@ -126,4 +126,46 @@ public class ApiController extends BaseController {
         }
         return jsonResult;
     }
+
+    @RequestMapping(value = "getAllSettings", method = RequestMethod.GET)
+    public JsonResult getAllSettings() {
+        JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
+        try {
+            List<SettingsInfo> list = settingsService.getAllSettings();
+            jsonResult.setData(list);
+        } catch (Exception ex) {
+            jsonResult.setStatus(JsonStatus.FAILED);
+            jsonResult.setMessage(ex.getMessage());
+            logger.error(ex);
+        }
+        return jsonResult;
+    }
+
+    @RequestMapping(value = "updateSettingsByKey", method = RequestMethod.POST)
+    public JsonResult updateSettingsByKey(@Valid SettingsInfo settingsInfo, BindingResult bindingResult) {
+        JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
+        try {
+            boolean result = settingsService.updateSettingsByKey(settingsInfo);
+            jsonResult.setData(result);
+        } catch (Exception ex) {
+            jsonResult.setStatus(JsonStatus.FAILED);
+            jsonResult.setMessage(ex.getMessage());
+            logger.error(ex);
+        }
+        return jsonResult;
+    }
+
+    @RequestMapping(value = "getSettingsByKey", method = RequestMethod.GET)
+    public JsonResult getSettingsByKey(String settingKey) {
+        JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
+        try {
+            SettingsInfo settingsInfo = settingsService.getSettingsByKey(settingKey);
+            jsonResult.setData(settingsInfo);
+        } catch (Exception ex) {
+            jsonResult.setStatus(JsonStatus.FAILED);
+            jsonResult.setMessage(ex.getMessage());
+            logger.error(ex);
+        }
+        return jsonResult;
+    }
 }

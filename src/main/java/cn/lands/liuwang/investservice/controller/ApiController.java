@@ -1,9 +1,7 @@
 package cn.lands.liuwang.investservice.controller;
 
 import cn.lands.liuwang.investservice.model.*;
-import cn.lands.liuwang.investservice.model.query.JsonResult;
-import cn.lands.liuwang.investservice.model.query.JsonStatus;
-import cn.lands.liuwang.investservice.model.query.QueryListParam;
+import cn.lands.liuwang.investservice.model.query.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -92,6 +90,34 @@ public class ApiController extends BaseController {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         try {
             List<PlanInvestNumberInfo> list = planInvestNumbersService.findInvestNumbersInfoList(listParam.getPageIndex(), listParam.getPageSize(), listParam.getPlanType());
+            jsonResult.setData(list);
+        } catch (Exception ex) {
+            jsonResult.setStatus(JsonStatus.FAILED);
+            jsonResult.setMessage(ex.getMessage());
+            logger.error(ex);
+        }
+        return jsonResult;
+    }
+
+    @RequestMapping(value = "getInvestInfoByPeriod", method = RequestMethod.POST)
+    public JsonResult getInvestInfoByPeriod(@Valid QueryInvestInfo queryInvestInfo, BindingResult bindingResult) {
+        JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
+        try {
+            InvestInfo investInfo = investService.getInvestInfoByPeriod(queryInvestInfo.getPlanType(), queryInvestInfo.getPeriod());
+            jsonResult.setData(investInfo);
+        } catch (Exception ex) {
+            jsonResult.setStatus(JsonStatus.FAILED);
+            jsonResult.setMessage(ex.getMessage());
+            logger.error(ex);
+        }
+        return jsonResult;
+    }
+
+    @RequestMapping(value = "findInvestInfoListBeforeTime", method = RequestMethod.POST)
+    public JsonResult findInvestInfoListBeforeTime(@Valid QueryListBeforeTime queryListBeforeTime, BindingResult bindingResult) {
+        JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
+        try {
+            List<InvestInfo> list = investService.findInvestInfoListBeforeTime(queryListBeforeTime.getPageIndex(), queryListBeforeTime.getPageSize(), queryListBeforeTime.getPlanType(), queryListBeforeTime.getBeforeTimeStr());
             jsonResult.setData(list);
         } catch (Exception ex) {
             jsonResult.setStatus(JsonStatus.FAILED);

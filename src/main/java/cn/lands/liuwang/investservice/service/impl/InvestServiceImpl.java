@@ -14,10 +14,20 @@ public class InvestServiceImpl extends BaseService implements InvestService {
 
 
     /**
-     * 查询投注记录
+     * 查询购买记录
      */
     @Override
     public List<InvestInfo> findInvestInfoList(int pageIndex, int pageSize, int planType) {
         return investDao.findInvestInfoList(pageIndex, pageSize, planType);
+    }
+
+    @Override
+    public InvestInfo getInvestInfoByPeriod(int planType, String period) {
+        return investDao.getInvestInfoByPeriod(planType, period);
+    }
+
+    @Override
+    public List<InvestInfo> findInvestInfoListBeforeTime(int pageIndex, int pageSize, int planType, String beforeTimeStr) {
+        return investDao.findInvestInfoListBeforeTime(pageIndex, pageSize, planType, beforeTimeStr);
     }
 }

@@ -15,8 +15,8 @@ public class SettingsServiceImpl extends BaseService implements SettingsService 
     }
 
     @Override
-    public boolean updateSettingsByKey(SettingsInfo settingsInfo) {
-        return settingsDao.updateSettingsByKey(settingsInfo);
+    public boolean updateSettingsById(SettingsInfo settingsInfo) {
+        return settingsDao.updateSettingsById(settingsInfo);
     }
 
     @Override

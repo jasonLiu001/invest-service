@@ -3,7 +3,6 @@ package cn.lands.liuwang.investservice.controller;
 import cn.lands.liuwang.investservice.model.*;
 import cn.lands.liuwang.investservice.model.query.*;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -145,7 +144,7 @@ public class ApiController extends BaseController {
     public JsonResult updateSettingsByKey(@Valid SettingsInfo settingsInfo, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         try {
-            boolean result = settingsService.updateSettingsByKey(settingsInfo);
+            boolean result = settingsService.updateSettingsById(settingsInfo);
             jsonResult.setData(result);
         } catch (Exception ex) {
             jsonResult.setStatus(JsonStatus.FAILED);

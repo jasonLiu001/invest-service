@@ -21,8 +21,8 @@ public class SettingsDaoImpl extends BaseDao implements SettingsDao {
     }
 
     @Override
-    public boolean updateSettingsByKey(SettingsInfo settingsInfo) {
-        int i = rewardJdbcTemplate.update("UPDATE settings SET `value`=? WHERE `key`=?", settingsInfo.getValue(), settingsInfo.getKey());
+    public boolean updateSettingsById(SettingsInfo settingsInfo) {
+        int i = rewardJdbcTemplate.update("UPDATE settings SET `value`=? WHERE `id`=?", settingsInfo.getValue(), settingsInfo.getId());
         return i > 0;
     }
 

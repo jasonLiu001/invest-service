@@ -13,7 +13,7 @@ public interface SettingsDao {
     /**
      * 更新设置
      */
-    boolean updateSettingsByKey(SettingsInfo settingsInfo);
+    boolean updateSettingsById(SettingsInfo settingsInfo);
 
     /**
      * 获取单个设置项

@@ -1,16 +1,16 @@
 package cn.lands.liuwang.investservice.model;
 
 public class SettingsInfo {
-    private String id;
+    private int id;
     private String key;
     private String value;
     private String desc;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

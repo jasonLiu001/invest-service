@@ -12,7 +12,7 @@ import java.util.List;
 public class SettingsDaoImpl extends BaseDao implements SettingsDao {
     @Override
     public List<SettingsInfo> getAllSettings() {
-        List<SettingsInfo> list = rewardJdbcTemplate.query("SELECT * FROM settings", new Object[]{}, new BeanPropertyRowMapper<>(SettingsInfo.class));
+        List<SettingsInfo> list = rewardJdbcTemplate.query("SELECT * FROM settings order by orderId asc", new Object[]{}, new BeanPropertyRowMapper<>(SettingsInfo.class));
         if (list.size() > 0) {
             return list;
         } else {
@@ -21,8 +21,8 @@ public class SettingsDaoImpl extends BaseDao implements SettingsDao {
     }
 
     @Override
-    public boolean updateSettingsById(SettingsInfo settingsInfo) {
-        int i = rewardJdbcTemplate.update("UPDATE settings SET `value`=? WHERE `id`=?", settingsInfo.getValue(), settingsInfo.getId());
+    public boolean updateSettingsByKey(SettingsInfo settingsInfo) {
+        int i = rewardJdbcTemplate.update("UPDATE settings SET `value`=? WHERE `key`=?", settingsInfo.getValue(), settingsInfo.getKey());
         return i > 0;
     }
 

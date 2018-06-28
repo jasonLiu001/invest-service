@@ -140,11 +140,11 @@ public class ApiController extends BaseController {
         return jsonResult;
     }
 
-    @RequestMapping(value = "updateSettingsById", method = RequestMethod.POST)
-    public JsonResult updateSettingsById(@Valid SettingsInfo settingsInfo, BindingResult bindingResult) {
+    @RequestMapping(value = "updateSettingsByKey", method = RequestMethod.POST)
+    public JsonResult updateSettingsByKey(@Valid SettingsInfo settingsInfo, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         try {
-            boolean result = settingsService.updateSettingsById(settingsInfo);
+            boolean result = settingsService.updateSettingsByKey(settingsInfo);
             jsonResult.setData(result);
         } catch (Exception ex) {
             jsonResult.setStatus(JsonStatus.FAILED);

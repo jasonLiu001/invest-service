@@ -24,4 +24,14 @@ public interface InvestDao {
      * @param beforeTimeStr 时间点 格式：02:00:00
      */
     List<InvestInfo> findInvestInfoListBeforeTime(int pageIndex, int pageSize, int planType, String beforeTimeStr);
+
+    /**
+     * 查询每天最大利润
+     */
+    List<InvestInfo> findInvestInfoListMaxProfit(int pageIndex, int pageSize, int planType);
+
+    /**
+     * 查询每天是否能达到指定盈利金额
+     */
+    List<InvestInfo> findInvestInfoListFixedProfit(int pageIndex, int pageSize, int planType, int fixedProfit);
 }

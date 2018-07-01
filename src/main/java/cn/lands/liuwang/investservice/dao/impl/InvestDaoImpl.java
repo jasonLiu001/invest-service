@@ -3,6 +3,7 @@ package cn.lands.liuwang.investservice.dao.impl;
 import cn.lands.liuwang.investservice.dao.BaseDao;
 import cn.lands.liuwang.investservice.dao.InvestDao;
 import cn.lands.liuwang.investservice.model.InvestInfo;
+import cn.lands.liuwang.investservice.model.ProfitInfo;
 import cn.lands.liuwang.investservice.model.ProfitType;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
@@ -52,7 +53,7 @@ public class InvestDaoImpl extends BaseDao implements InvestDao {
      * 查询每天最大利润
      */
     @Override
-    public List<InvestInfo> findInvestInfoListProfit(int pageIndex, int pageSize, int planType, int fixedProfit, ProfitType profitType) {
+    public List<ProfitInfo> findInvestInfoListProfit(int pageIndex, int pageSize, int planType, int fixedProfit, ProfitType profitType) {
         String sql;
         Object[] params;
         switch (profitType.getKey()) {
@@ -84,7 +85,7 @@ public class InvestDaoImpl extends BaseDao implements InvestDao {
                 sql = "SELECT A.investDate,MAX(A.currentAccountBalance) maxporfit FROM (SELECT * FROM invest R WHERE R.`investTimestamp`>='10:00:00' AND R.`investTimestamp`<='22:00:00' AND R.planType=?) A GROUP BY A.investDate ORDER BY A.investDate DESC LIMIT ?,?";
                 params = new Object[]{planType, (pageIndex - 1) * pageSize, pageSize};
         }
-        List<InvestInfo> list = rewardJdbcTemplate.query(sql, params, new BeanPropertyRowMapper<>(InvestInfo.class));
+        List<ProfitInfo> list = rewardJdbcTemplate.query(sql, params, new BeanPropertyRowMapper<>(ProfitInfo.class));
         if (list.size() > 0) {
             return list;
         } else {

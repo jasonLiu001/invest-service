@@ -1,6 +1,7 @@
 package cn.lands.liuwang.investservice.service;
 
 import cn.lands.liuwang.investservice.model.InvestInfo;
+import cn.lands.liuwang.investservice.model.ProfitInfo;
 import cn.lands.liuwang.investservice.model.ProfitType;
 
 import java.util.List;
@@ -26,5 +27,5 @@ public interface InvestService {
     /**
      * 查询每天全天最大利润
      */
-    List<InvestInfo> findInvestInfoListProfit(int pageIndex, int pageSize, int planType, int fixedProfit, ProfitType profitType);
+    List<ProfitInfo> findInvestInfoListProfit(int pageIndex, int pageSize, int planType, int fixedProfit, ProfitType profitType);
 }

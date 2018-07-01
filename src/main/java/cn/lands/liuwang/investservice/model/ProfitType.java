@@ -40,7 +40,7 @@ public enum ProfitType {
 
     public static ProfitType getProfitTypeByKey(String keyName) {
         for (ProfitType bt : values()) {
-            if (bt.key == keyName) {
+            if (bt.key.equalsIgnoreCase(keyName)) {
                 return bt;
             }
         }

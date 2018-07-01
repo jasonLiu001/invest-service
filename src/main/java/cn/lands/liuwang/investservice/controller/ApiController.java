@@ -172,7 +172,7 @@ public class ApiController extends BaseController {
     public JsonResult findInvestInfoListProfit(@Valid QueryListProfit queryListProfit, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         try {
-            List<InvestInfo> list = investService.findInvestInfoListProfit(queryListProfit.getPageIndex(), queryListProfit.getPageSize(), queryListProfit.getPlanType(), queryListProfit.getFixedProfit(), ProfitType.getProfitTypeByKey(queryListProfit.getProfitType()));
+            List<ProfitInfo> list = investService.findInvestInfoListProfit(queryListProfit.getPageIndex(), queryListProfit.getPageSize(), queryListProfit.getPlanType(), queryListProfit.getFixedProfit(), ProfitType.getProfitTypeByKey(queryListProfit.getProfitType()));
             jsonResult.setData(list);
         } catch (Exception ex) {
             jsonResult.setStatus(JsonStatus.FAILED);

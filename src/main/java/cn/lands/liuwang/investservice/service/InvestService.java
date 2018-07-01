@@ -1,6 +1,7 @@
 package cn.lands.liuwang.investservice.service;
 
 import cn.lands.liuwang.investservice.model.InvestInfo;
+import cn.lands.liuwang.investservice.model.ProfitType;
 
 import java.util.List;
 
@@ -21,4 +22,9 @@ public interface InvestService {
      * @param beforeTimeStr 时间点 格式：02:00:00
      */
     List<InvestInfo> findInvestInfoListBeforeTime(int pageIndex, int pageSize, int planType, String beforeTimeStr);
+
+    /**
+     * 查询每天全天最大利润
+     */
+    List<InvestInfo> findInvestInfoListProfit(int pageIndex, int pageSize, int planType, int fixedProfit, ProfitType profitType);
 }

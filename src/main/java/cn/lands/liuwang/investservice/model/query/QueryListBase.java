@@ -1,9 +1,6 @@
 package cn.lands.liuwang.investservice.model.query;
 
-/**
- * 开奖号码查询参数
- */
-public class QueryListParam {
+public class QueryListBase {
     private int pageIndex;
     private int pageSize;
     private int planType;

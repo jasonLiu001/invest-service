@@ -3,9 +3,11 @@ package cn.lands.liuwang.investservice.dao.impl;
 import cn.lands.liuwang.investservice.dao.BaseDao;
 import cn.lands.liuwang.investservice.dao.InvestDao;
 import cn.lands.liuwang.investservice.model.InvestInfo;
+import cn.lands.liuwang.investservice.model.ProfitType;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -50,21 +52,39 @@ public class InvestDaoImpl extends BaseDao implements InvestDao {
      * 查询每天最大利润
      */
     @Override
-    public List<InvestInfo> findInvestInfoListMaxProfit(int pageIndex, int pageSize, int planType) {
-        List<InvestInfo> list = rewardJdbcTemplate.query("", new Object[]{"", planType, (pageIndex - 1) * pageSize, pageSize}, new BeanPropertyRowMapper<>(InvestInfo.class));
-        if (list.size() > 0) {
-            return list;
-        } else {
-            return null;
+    public List<InvestInfo> findInvestInfoListProfit(int pageIndex, int pageSize, int planType, int fixedProfit, ProfitType profitType) {
+        String sql;
+        Object[] params;
+        switch (profitType.getKey()) {
+            case "wholeday_maxprofit":
+                sql = "SELECT A.investDate,MAX(A.currentAccountBalance) maxporfit FROM (SELECT * FROM invest R WHERE R.`investTimestamp`>='10:00:00' AND R.`investTime`<=CONCAT(DATE_FORMAT(DATE_ADD(R.`investDate`, INTERVAL 1 DAY),'%Y-%m-%d'), ' 02:00:00') AND R.planType=?) A GROUP BY A.investDate ORDER BY A.investDate DESC LIMIT ?,?;";
+                params = new Object[]{planType, (pageIndex - 1) * pageSize, pageSize};
+                break;
+            case "before22_maxprofit":
+                sql = "SELECT A.investDate,MAX(A.currentAccountBalance) maxporfit FROM (SELECT * FROM invest R WHERE R.`investTimestamp`>='10:00:00' AND R.`investTimestamp`<='22:00:00' AND R.planType=?) A GROUP BY A.investDate ORDER BY A.investDate DESC LIMIT ?,?";
+                params = new Object[]{planType, (pageIndex - 1) * pageSize, pageSize};
+                break;
+            case "wholeday_minprofit":
+                sql = "SELECT A.investDate,MIN(A.currentAccountBalance) maxporfit FROM (SELECT * FROM invest R WHERE R.`investTimestamp`>='10:00:00' AND R.`investTime`<=CONCAT(DATE_FORMAT(DATE_ADD(R.`investDate`, INTERVAL 1 DAY),'%Y-%m-%d'), ' 02:00:00') AND R.planType=?) A GROUP BY A.investDate ORDER BY A.investDate DESC LIMIT ?,?";
+                params = new Object[]{planType, (pageIndex - 1) * pageSize, pageSize};
+                break;
+            case "before22_minprofit":
+                sql = "SELECT A.investDate,MIN(A.currentAccountBalance) maxporfit FROM (SELECT * FROM invest R WHERE R.`investTimestamp`>='10:00:00' AND R.`investTimestamp`<='22:00:00' AND R.planType=?) A GROUP BY A.investDate ORDER BY A.investDate DESC LIMIT ?,?";
+                params = new Object[]{planType, (pageIndex - 1) * pageSize, pageSize};
+                break;
+            case "wholeday_fixedprofit":
+                sql = "SELECT A.investDate,MAX(A.currentAccountBalance) maxporfit FROM (SELECT * FROM invest R WHERE R.`investTimestamp`>='10:00:00' AND R.`investTime`<=CONCAT(DATE_FORMAT(DATE_ADD(R.`investDate`, INTERVAL 1 DAY),'%Y-%m-%d'), ' 02:00:00') AND R.planType=?) A GROUP BY A.investDate HAVING maxporfit>=? ORDER BY A.investDate DESC LIMIT ?,?";
+                params = new Object[]{planType, fixedProfit, (pageIndex - 1) * pageSize, pageSize};
+                break;
+            case "before22_fixedprofit":
+                sql = "SELECT A.investDate,MAX(A.currentAccountBalance) maxporfit FROM (SELECT * FROM invest R WHERE R.`investTimestamp`>='10:00:00' AND R.`investTimestamp`<='22:00:00' AND R.planType=?) A GROUP BY A.investDate HAVING maxporfit>=? ORDER BY A.investDate DESC LIMIT ?,?";
+                params = new Object[]{planType, fixedProfit, (pageIndex - 1) * pageSize, pageSize};
+                break;
+            default:
+                sql = "SELECT A.investDate,MAX(A.currentAccountBalance) maxporfit FROM (SELECT * FROM invest R WHERE R.`investTimestamp`>='10:00:00' AND R.`investTimestamp`<='22:00:00' AND R.planType=?) A GROUP BY A.investDate ORDER BY A.investDate DESC LIMIT ?,?";
+                params = new Object[]{planType, (pageIndex - 1) * pageSize, pageSize};
         }
-    }
-
-    /**
-     * 查询每天是否能达到指定盈利金额
-     */
-    @Override
-    public List<InvestInfo> findInvestInfoListFixedProfit(int pageIndex, int pageSize, int planType, int fixedProfit) {
-        List<InvestInfo> list = rewardJdbcTemplate.query("", new Object[]{"", planType, (pageIndex - 1) * pageSize, pageSize}, new BeanPropertyRowMapper<>(InvestInfo.class));
+        List<InvestInfo> list = rewardJdbcTemplate.query(sql, params, new BeanPropertyRowMapper<>(InvestInfo.class));
         if (list.size() > 0) {
             return list;
         } else {

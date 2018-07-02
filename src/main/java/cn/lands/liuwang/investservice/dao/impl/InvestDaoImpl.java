@@ -58,7 +58,7 @@ public class InvestDaoImpl extends BaseDao implements InvestDao {
         Object[] params;
         switch (profitType.getKey()) {
             case "wholeday_maxprofit":
-                sql = "SELECT A.investDate,MAX(A.currentAccountBalance) maxporfit FROM (SELECT * FROM invest R WHERE R.`investTimestamp`>='10:00:00' AND R.`investTime`<=CONCAT(DATE_FORMAT(DATE_ADD(R.`investDate`, INTERVAL 1 DAY),'%Y-%m-%d'), ' 02:00:00') AND R.planType=?) A GROUP BY A.investDate ORDER BY A.investDate DESC LIMIT ?,?;";
+                sql = "SELECT A.investDate,MAX(A.currentAccountBalance) maxporfit FROM (SELECT * FROM invest R WHERE R.`investTimestamp`>='10:00:00' AND R.`investTimestamp`<='23:59:59' AND R.planType=?) A GROUP BY A.investDate ORDER BY A.investDate DESC LIMIT ?,?";
                 params = new Object[]{planType, (pageIndex - 1) * pageSize, pageSize};
                 break;
             case "before22_maxprofit":
@@ -66,7 +66,7 @@ public class InvestDaoImpl extends BaseDao implements InvestDao {
                 params = new Object[]{planType, (pageIndex - 1) * pageSize, pageSize};
                 break;
             case "wholeday_minprofit":
-                sql = "SELECT A.investDate,MIN(A.currentAccountBalance) maxporfit FROM (SELECT * FROM invest R WHERE R.`investTimestamp`>='10:00:00' AND R.`investTime`<=CONCAT(DATE_FORMAT(DATE_ADD(R.`investDate`, INTERVAL 1 DAY),'%Y-%m-%d'), ' 02:00:00') AND R.planType=?) A GROUP BY A.investDate ORDER BY A.investDate DESC LIMIT ?,?";
+                sql = "SELECT A.investDate,MIN(A.currentAccountBalance) maxporfit FROM (SELECT * FROM invest R WHERE R.`investTimestamp`>='10:00:00' AND R.`investTimestamp`<='23:59:59' AND R.planType=?) A GROUP BY A.investDate ORDER BY A.investDate DESC LIMIT ?,?";
                 params = new Object[]{planType, (pageIndex - 1) * pageSize, pageSize};
                 break;
             case "before22_minprofit":
@@ -74,7 +74,7 @@ public class InvestDaoImpl extends BaseDao implements InvestDao {
                 params = new Object[]{planType, (pageIndex - 1) * pageSize, pageSize};
                 break;
             case "wholeday_fixedprofit":
-                sql = "SELECT A.investDate,MAX(A.currentAccountBalance) maxporfit FROM (SELECT * FROM invest R WHERE R.`investTimestamp`>='10:00:00' AND R.`investTime`<=CONCAT(DATE_FORMAT(DATE_ADD(R.`investDate`, INTERVAL 1 DAY),'%Y-%m-%d'), ' 02:00:00') AND R.planType=?) A GROUP BY A.investDate HAVING maxporfit>=? ORDER BY A.investDate DESC LIMIT ?,?";
+                sql = "SELECT A.investDate,MAX(A.currentAccountBalance) maxporfit FROM (SELECT * FROM invest R WHERE R.`investTimestamp`>='10:00:00' AND R.`investTimestamp`<='23:59:59' AND R.planType=?) A GROUP BY A.investDate HAVING maxporfit>=? ORDER BY A.investDate DESC LIMIT ?,?";
                 params = new Object[]{planType, fixedProfit, (pageIndex - 1) * pageSize, pageSize};
                 break;
             case "before22_fixedprofit":

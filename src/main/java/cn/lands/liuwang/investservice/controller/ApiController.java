@@ -28,10 +28,10 @@ public class ApiController extends BaseController {
     }
 
     @RequestMapping(value = "findInvestInfoList", method = RequestMethod.POST)
-    public JsonResult findInvestInfoList(@Valid QueryListBase listParam, BindingResult bindingResult) {
+    public JsonResult findInvestInfoList(@Valid QueryListBeforeTime queryListBeforeTime, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         try {
-            List<InvestInfo> list = investService.findInvestInfoList(listParam.getPageIndex(), listParam.getPageSize(), listParam.getPlanType());
+            List<InvestInfo> list = investService.findInvestInfoList(queryListBeforeTime.getPageIndex(), queryListBeforeTime.getPageSize(), queryListBeforeTime.getPlanType(), queryListBeforeTime.getBeforeTimeStr());
             jsonResult.setData(list);
         } catch (Exception ex) {
             jsonResult.setStatus(JsonStatus.FAILED);

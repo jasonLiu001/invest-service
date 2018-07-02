@@ -7,6 +7,7 @@ import cn.lands.liuwang.investservice.model.ProfitInfo;
 import cn.lands.liuwang.investservice.model.ProfitType;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +19,17 @@ public class InvestDaoImpl extends BaseDao implements InvestDao {
      * 查询投注记录
      */
     @Override
-    public List<InvestInfo> findInvestInfoList(int pageIndex, int pageSize, int planType) {
-        List<InvestInfo> list = rewardJdbcTemplate.query("SELECT period,planType,investNumberCount,currentAccountBalance,awardMode,winMoney,status,isWin,investTime FROM `invest` WHERE planType=? ORDER BY period DESC LIMIT ?,?;", new Object[]{planType, (pageIndex - 1) * pageSize, pageSize}, new BeanPropertyRowMapper<>(InvestInfo.class));
+    public List<InvestInfo> findInvestInfoList(int pageIndex, int pageSize, int planType, String beforeTimeStr) {
+        String sql;
+        Object[] params;
+        if (StringUtils.isEmpty(beforeTimeStr)) {
+            sql = "SELECT period,planType,investNumberCount,currentAccountBalance,awardMode,winMoney,status,isWin,investTime FROM `invest` WHERE planType=? ORDER BY period DESC LIMIT ?,?";
+            params = new Object[]{planType, (pageIndex - 1) * pageSize, pageSize};
+        } else {
+            sql = "SELECT period,planType,investNumberCount,currentAccountBalance,awardMode,winMoney,STATUS,isWin,investTime FROM `invest` WHERE planType=? AND investTimestamp>='09:50:00' AND investTimestamp<=? ORDER BY period DESC LIMIT ?,?";
+            params = new Object[]{planType, beforeTimeStr, (pageIndex - 1) * pageSize, pageSize};
+        }
+        List<InvestInfo> list = rewardJdbcTemplate.query(sql, params, new BeanPropertyRowMapper<>(InvestInfo.class));
         if (list.size() > 0) {
             return list;
         } else {

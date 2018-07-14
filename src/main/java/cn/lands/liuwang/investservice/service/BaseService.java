@@ -11,9 +11,6 @@ public class BaseService {
     protected AwardDao awardDao;
 
     @Autowired
-    protected MaxProfitDao maxProfitDao;
-
-    @Autowired
     protected PlanDao planDao;
 
     @Autowired

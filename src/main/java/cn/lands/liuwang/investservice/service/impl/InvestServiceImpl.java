@@ -16,7 +16,7 @@ public class InvestServiceImpl extends BaseService implements InvestService {
 
 
     /**
-     * 查询购买记录
+     * 查询 所有/一定时间返回内 购买记录
      */
     @Override
     public List<InvestInfo> findInvestInfoList(int pageIndex, int pageSize, int planType, String beforeTimeStr) {
@@ -28,6 +28,9 @@ public class InvestServiceImpl extends BaseService implements InvestService {
         return investDao.getInvestInfoByPeriod(planType, period);
     }
 
+    /**
+     * 查询特定时间内的 最大利润
+     */
     @Override
     public List<InvestInfo> findInvestInfoListBeforeTime(int pageIndex, int pageSize, int planType, String beforeTimeStr) {
         return investDao.findInvestInfoListBeforeTime(pageIndex, pageSize, planType, beforeTimeStr);

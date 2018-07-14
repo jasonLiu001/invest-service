@@ -42,20 +42,6 @@ public class ApiController extends BaseController {
         return jsonResult;
     }
 
-    @RequestMapping(value = "findMaxProfitInfoList", method = RequestMethod.POST)
-    public JsonResult findMaxProfitInfoList(@Valid QueryListBase listParam, BindingResult bindingResult) {
-        JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
-        try {
-            List<MaxProfitInfo> list = maxProfitService.findMaxProfitInfoList(listParam.getPageIndex(), listParam.getPageSize(), listParam.getPlanType());
-            jsonResult.setData(list);
-        } catch (Exception ex) {
-            jsonResult.setStatus(JsonStatus.FAILED);
-            jsonResult.setMessage(ex.getMessage());
-            logger.error(ex);
-        }
-        return jsonResult;
-    }
-
     @RequestMapping(value = "findPlanInfoList", method = RequestMethod.POST)
     public JsonResult findPlanInfoList(@Valid QueryListBase listParam, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());

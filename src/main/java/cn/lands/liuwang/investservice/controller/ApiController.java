@@ -112,6 +112,20 @@ public class ApiController extends BaseController {
         return jsonResult;
     }
 
+    @RequestMapping(value = "getInvestTotalInfoByPeriod", method = RequestMethod.POST)
+    public JsonResult getInvestTotalInfoByPeriod(@Valid QueryInvestInfo queryInvestInfo, BindingResult bindingResult) {
+        JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
+        try {
+            InvestTotalInfo investTotalInfo = investTotalService.getInvestTotalInfoByPeriod(queryInvestInfo.getPlanType(), queryInvestInfo.getPeriod());
+            jsonResult.setData(investTotalInfo);
+        } catch (Exception ex) {
+            jsonResult.setStatus(JsonStatus.FAILED);
+            jsonResult.setMessage(ex.getMessage());
+            logger.error(ex);
+        }
+        return jsonResult;
+    }
+
     @RequestMapping(value = "findInvestInfoListBeforeTime", method = RequestMethod.POST)
     public JsonResult findInvestInfoListBeforeTime(@Valid QueryListBeforeTime queryListBeforeTime, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());

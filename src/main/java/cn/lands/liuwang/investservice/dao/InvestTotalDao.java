@@ -9,4 +9,9 @@ public interface InvestTotalDao {
      * 查询所有的投注记录
      */
     List<InvestTotalInfo> findInvestTotalInfoList(int pageIndex, int pageSize, int planType);
+
+    /**
+     * 根据期号查询购买号码
+     */
+    InvestTotalInfo getInvestTotalInfoByPeriod(int planType, String period);
 }

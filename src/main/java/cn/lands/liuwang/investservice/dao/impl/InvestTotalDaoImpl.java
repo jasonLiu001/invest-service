@@ -24,4 +24,17 @@ public class InvestTotalDaoImpl extends BaseDao implements InvestTotalDao {
             return null;
         }
     }
+
+    /**
+     * 根据期号查询购买号码
+     */
+    @Override
+    public InvestTotalInfo getInvestTotalInfoByPeriod(int planType, String period) {
+        List<InvestTotalInfo> list = rewardJdbcTemplate.query("SELECT * FROM invest_total WHERE period=? AND planType=?", new Object[]{period, planType}, new BeanPropertyRowMapper<>(InvestTotalInfo.class));
+        if (list.size() > 0) {
+            return list.get(0);
+        } else {
+            return null;
+        }
+    }
 }

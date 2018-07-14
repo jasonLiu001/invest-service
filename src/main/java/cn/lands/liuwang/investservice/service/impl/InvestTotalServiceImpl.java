@@ -16,4 +16,12 @@ public class InvestTotalServiceImpl extends BaseService implements InvestTotalSe
     public List<InvestTotalInfo> findInvestTotalInfoList(int pageIndex, int pageSize, int planType) {
         return investTotalDao.findInvestTotalInfoList(pageIndex, pageSize, planType);
     }
+
+    /**
+     * 根据期号查询购买号码
+     */
+    @Override
+    public InvestTotalInfo getInvestTotalInfoByPeriod(int planType, String period) {
+        return investTotalDao.getInvestTotalInfoByPeriod(planType, period);
+    }
 }

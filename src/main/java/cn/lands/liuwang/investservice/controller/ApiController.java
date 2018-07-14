@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/lottery")
 public class ApiController extends BaseController {
-    @RequestMapping(value = "/findAwardInfoList", method = RequestMethod.POST)
+    @RequestMapping(value = "findAwardInfoList", method = RequestMethod.POST)
     public JsonResult findAwardInfoList(@Valid QueryListBase listParam, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         try {
@@ -168,7 +168,7 @@ public class ApiController extends BaseController {
         return jsonResult;
     }
 
-    @RequestMapping(value = "/findInvestInfoListProfit", method = RequestMethod.POST)
+    @RequestMapping(value = "findInvestInfoListProfit", method = RequestMethod.POST)
     public JsonResult findInvestInfoListProfit(@Valid QueryListProfit queryListProfit, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         try {

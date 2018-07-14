@@ -8,6 +8,9 @@ public class BaseService {
     protected InvestDao investDao;
 
     @Autowired
+    protected InvestTotalDao investTotalDao;
+
+    @Autowired
     protected AwardDao awardDao;
 
     @Autowired

@@ -15,6 +15,9 @@ public class BaseController {
     protected InvestService investService;
 
     @Autowired
+    protected InvestTotalService investTotalService;
+
+    @Autowired
     protected PlanService planService;
 
     @Autowired

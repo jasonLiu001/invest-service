@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/lottery")
@@ -46,8 +48,45 @@ public class ApiController extends BaseController {
     public JsonResult findInvestTotalInfoList(@Valid QueryListBase queryListBase, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         try {
-            List<InvestTotalInfo> list = investTotalService.findInvestTotalInfoList(queryListBase.getPageIndex(), queryListBase.getPageSize(), queryListBase.getPlanType());
-            jsonResult.setData(list);
+            List<InvestTotalListInfo> resultList = new ArrayList<InvestTotalListInfo>();
+            List<InvestTotalInfo> plan01List = investTotalService.findInvestTotalInfoList(queryListBase.getPageIndex(), queryListBase.getPageSize(), 1);
+            List<InvestTotalInfo> plan02List = investTotalService.findInvestTotalInfoList(queryListBase.getPageIndex(), queryListBase.getPageSize(), 2);
+            List<InvestTotalInfo> plan03List = investTotalService.findInvestTotalInfoList(queryListBase.getPageIndex(), queryListBase.getPageSize(), 3);
+            List<InvestTotalInfo> plan04List = investTotalService.findInvestTotalInfoList(queryListBase.getPageIndex(), queryListBase.getPageSize(), 4);
+            //期号列表
+            List<String> periodList = plan01List.stream().map(InvestTotalInfo::getPeriod).collect(Collectors.toList());
+            periodList.forEach(period -> {
+                InvestTotalListInfo info = new InvestTotalListInfo();
+                info.setPeriod(period);
+                info.setInvestTotalInfos(new ArrayList<InvestTotalInfo>());
+
+                //方案1
+                plan01List.forEach(plan01 -> {
+                    if (plan01.getPeriod().equals(period)) {
+                        info.getInvestTotalInfos().add(plan01);
+                    }
+                });
+                //方案2
+                plan02List.forEach(plan02 -> {
+                    if (plan02.getPeriod().equals(period)) {
+                        info.getInvestTotalInfos().add(plan02);
+                    }
+                });
+                //方案3
+                plan03List.forEach(plan03 -> {
+                    if (plan03.getPeriod().equals(period)) {
+                        info.getInvestTotalInfos().add(plan03);
+                    }
+                });
+                //方案4
+                plan04List.forEach(plan04 -> {
+                    if (plan04.getPeriod().equals(period)) {
+                        info.getInvestTotalInfos().add(plan04);
+                    }
+                });
+                resultList.add(info);
+            });
+            jsonResult.setData(resultList);
         } catch (Exception ex) {
             jsonResult.setStatus(JsonStatus.FAILED);
             jsonResult.setMessage(ex.getMessage());

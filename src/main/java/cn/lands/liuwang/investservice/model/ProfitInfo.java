@@ -2,7 +2,16 @@ package cn.lands.liuwang.investservice.model;
 
 public class ProfitInfo {
     private String investDate;
-    private double maxporfit;
+    private double maxprofit;
+    private double minprofit;
+
+    public double getMinprofit() {
+        return minprofit;
+    }
+
+    public void setMinprofit(double minprofit) {
+        this.minprofit = minprofit;
+    }
 
     public String getInvestDate() {
         return investDate;
@@ -12,11 +21,11 @@ public class ProfitInfo {
         this.investDate = investDate;
     }
 
-    public double getMaxporfit() {
-        return maxporfit;
+    public double getMaxprofit() {
+        return maxprofit;
     }
 
-    public void setMaxporfit(double maxporfit) {
-        this.maxporfit = maxporfit;
+    public void setMaxprofit(double maxprofit) {
+        this.maxprofit = maxprofit;
     }
 }

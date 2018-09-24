@@ -1,5 +1,6 @@
-package cn.lands.liuwang.investservice.controller;
+package cn.lands.liuwang.investservice.api;
 
+import cn.lands.liuwang.investservice.controller.BaseController;
 import cn.lands.liuwang.investservice.model.*;
 import cn.lands.liuwang.investservice.model.query.*;
 import org.springframework.validation.BindingResult;

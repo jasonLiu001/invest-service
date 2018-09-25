@@ -5,7 +5,7 @@ module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
+    publicPath: '/service/dist/',//这里的/service是tomcat的虚拟目录
     filename: 'build.js'
   },
   module: {
@@ -78,7 +78,8 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     noInfo: true,
-    overlay: true
+    overlay: true,
+    port: 9000
   },
   performance: {
     hints: false

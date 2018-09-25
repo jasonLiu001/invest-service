@@ -27,12 +27,4 @@ public class HomeController extends BaseController {
     public String Login() {
         return "login";
     }
-
-    /**
-     * 关于页
-     */
-    @RequestMapping(value = "/about", method = RequestMethod.GET)
-    public String About() {
-        return "about";
-    }
 }

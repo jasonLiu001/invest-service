@@ -18,7 +18,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/css/**", "/js/**", "images/**", "/web/about").permitAll()
+                .antMatchers("/", "/lottery/**", "/css/**", "/js/**", "/images/**", "/web/about").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -27,6 +27,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll();
+
+        //开启跨站请求 不关闭会导致其他客户端无法访问
+        http.csrf().disable();
     }
 
     @Override

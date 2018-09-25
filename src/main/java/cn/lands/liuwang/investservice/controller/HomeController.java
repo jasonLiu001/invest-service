@@ -13,6 +13,22 @@ public class HomeController extends BaseController {
      */
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String Index() {
-      return "index";
+        return "index";
+    }
+
+    /**
+     * 登录页
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String Login() {
+        return "login";
+    }
+
+    /**
+     * 关于页
+     */
+    @RequestMapping(value = "/about", method = RequestMethod.GET)
+    public String About() {
+        return "about";
     }
 }

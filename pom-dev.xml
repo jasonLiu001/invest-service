@@ -82,4 +82,17 @@
 		</dependency>
 
 	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<excludes>
+					<!--<exclude>static/dist/**/*.debug.js</exclude>-->
+					<exclude>static/node_modules/**</exclude>
+				</excludes>
+			</resource>
+		</resources>
+	</build>
 </project>

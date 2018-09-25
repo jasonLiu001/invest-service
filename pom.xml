@@ -43,6 +43,13 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!--Spring security-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
 		<!--add thymeleaf dependency-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

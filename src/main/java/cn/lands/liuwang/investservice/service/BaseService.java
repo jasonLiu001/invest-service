@@ -24,4 +24,7 @@ public class BaseService {
 
     @Autowired
     protected SettingsDao settingsDao;
+
+    @Autowired
+    protected UserDao userDao;
 }

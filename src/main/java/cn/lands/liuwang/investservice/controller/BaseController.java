@@ -1,6 +1,5 @@
 package cn.lands.liuwang.investservice.controller;
 
-import cn.lands.liuwang.investservice.InvestServiceApplication;
 import cn.lands.liuwang.investservice.service.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,6 +27,9 @@ public class BaseController {
 
     @Autowired
     protected SettingsService settingsService;
+
+    @Autowired
+    protected UserService userService;
 
     protected final Logger logger = LogManager.getLogger(this.getClass());
 }

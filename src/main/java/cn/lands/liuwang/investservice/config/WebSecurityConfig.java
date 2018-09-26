@@ -20,13 +20,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/lottery/**", "/src/css/**", "/src/js/**", "/src/images/**").permitAll()
                 .anyRequest().authenticated()
+
                 .and()
                 .formLogin()
                 .loginPage("/web/login")
                 .permitAll()
+
                 .and()
                 .logout()
-                .permitAll();
+                .permitAll()
+
+                .and()
+                .rememberMe().key("uniqueAndSecret").tokenValiditySeconds(86400);
 
         //开启跨站请求 不关闭会导致其他客户端无法访问
         http.csrf().disable();

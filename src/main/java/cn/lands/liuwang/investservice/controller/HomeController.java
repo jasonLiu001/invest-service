@@ -13,6 +13,14 @@ import java.security.Principal;
 @RequestMapping("/web")
 public class HomeController extends BaseController {
     /**
+     * 首页
+     */
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String Index() {
+        return "index";
+    }
+
+    /**
      * 登录页
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)

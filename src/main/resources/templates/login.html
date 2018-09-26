@@ -4,18 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>用户登录</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/src/css/bootstrap.min.css}">
+    <script type="text/javascript" th:src="@{/src/js/jquery-3.3.1.slim.min.js}"></script>
+    <script type="text/javascript" th:src="@{/src/js/popper-1.14.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/src/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<div th:if="${param.error}">
-    Invalid username and password.
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-8">
+            <h3>登 录</h3>
+        </div>
+    </div>
+    <div class="alert alert-warning alert-dismissible fade show" th:if="${param.error!=null||param.logout!=null}"
+         role="alert">
+        <strong th:if="${param.error}">Invalid username and password.</strong>
+        <strong th:if="${param.logout}">You have been logged out.</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form th:action="@{/web/login}" method="post">
+        <div class="form-group row">
+            <label for="username" class="col-sm-2 col-form-label">UserName</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="username" id="username" placeholder="Username">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" name="password" id="inputPassword3" placeholder="Password">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridCheck1">
+                    <label class="form-check-label" for="gridCheck1">
+                        Remember Me
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-5"></div>
+            <div class="col-sm-7">
+                <input type="submit" class="btn btn-primary" value="登录"></input>
+            </div>
+        </div>
+    </form>
 </div>
-<div th:if="${param.logout}">
-    You have been logged out.
-</div>
-<form th:action="@{/web/login}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
-</form>
 </body>
 </html>

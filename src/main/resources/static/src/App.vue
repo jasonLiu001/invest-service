@@ -1,6 +1,13 @@
 <template>
   <div id="app">
+    <!-- router-link 定义点击后导航到哪个路径下 -->
+    <router-link to="/list">List</router-link>
+    <router-link to="/about">About</router-link>
 
+
+    <!-- route outlet -->
+    <!-- component matched by the route will render here -->
+    <router-view></router-view>
   </div>
 </template>
 

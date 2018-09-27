@@ -2,60 +2,63 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <title>用户登录</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/src/css/bootstrap.min.css}">
-    <script type="text/javascript" th:src="@{/src/js/jquery-3.3.1.slim.min.js}"></script>
-    <script type="text/javascript" th:src="@{/src/js/popper-1.14.3.min.js}"></script>
-    <script type="text/javascript" th:src="@{/src/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/src/css/index.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/src/css/vuetify.min.css}">
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-4"></div>
-        <div class="col-sm-8">
-            <h3>登 录</h3>
-        </div>
-    </div>
-    <div class="alert alert-warning alert-dismissible fade show" th:if="${param.error!=null||param.logout!=null}"
-         role="alert">
-        <strong th:if="${param.error}">Invalid username and password.</strong>
-        <strong th:if="${param.logout}">You have been logged out.</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <form th:action="@{/web/login}" method="post">
-        <div class="form-group row">
-            <label for="username" class="col-sm-2 col-form-label">UserName</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="username" id="username" placeholder="Username">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-            <div class="col-sm-10">
-                <input type="password" class="form-control" name="password" id="inputPassword3" placeholder="Password">
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-10">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="remember-me" id="remember-me">
-                    <label class="form-check-label" for="remember-me">
-                        Remember Me
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-5"></div>
-            <div class="col-sm-7">
-                <input type="submit" class="btn btn-primary" value="登录"></input>
-            </div>
-        </div>
-    </form>
+<div id="app">
+    <v-app>
+        <v-content>
+            <v-container fluid fill-height>
+                <v-layout align-center justify-center>
+                    <v-flex xs12 sm8 md4>
+                        <!--登录失败提示-->
+                        <v-alert v-model="alert" dismissible type="success">
+                            <strong th:if="${param.error}">Invalid username and password.</strong>
+                            <strong th:if="${param.logout}">You have been logged out.</strong>
+                        </v-alert>
+
+                        <!--登录表单-->
+                        <v-card class="elevation-12">
+                            <v-toolbar dark color="primary">
+                                <v-toolbar-title>Login</v-toolbar-title>
+                                <v-spacer></v-spacer>
+                            </v-toolbar>
+                            <v-card-text>
+                                <v-form th:action="@{/web/login}" method="post">
+                                    <v-text-field prepend-icon="person" name="username" label="Username" id="username"
+                                                  type="text"></v-text-field>
+                                    <v-text-field id="password" prepend-icon="lock" name="password" label="Password"
+                                                  type="password"></v-text-field>
+                                    <v-checkbox v-model="checkbox" name="remember-me" id="remember-me"
+                                                label="Remember Me?" required>
+                                    </v-checkbox>
+                                    <v-btn color="primary" type="submit">Login</v-btn>
+                                </v-form>
+                            </v-card-text>
+                        </v-card>
+                    </v-flex>
+                </v-layout>
+            </v-container>
+        </v-content>
+    </v-app>
 </div>
+<script type="text/javascript" th:src="@{/src/js/vue-2.5.17.min.js}"></script>
+<script type="text/javascript" th:src="@{/src/js/vuetify.min.js}"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                checkbox: false,
+                alert: /*[[${param.error!=null||param.logout!=null}]]*/ false
+            }
+        }
+    })
+    /*]]>*/
+</script>
 </body>
 </html>

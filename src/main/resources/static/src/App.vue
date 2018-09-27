@@ -46,16 +46,10 @@
       }
     },
     methods: {
-      closeDrawer() {
-        //是否显示左侧菜单
-        this.drawer = !this.drawer;
-      },
       goProfit() {
-        this.closeDrawer();
         this.$router.push({path: 'profit'});
       },
       goAbout() {
-        this.closeDrawer();
         this.$router.push({path: 'about'});
       }
     },

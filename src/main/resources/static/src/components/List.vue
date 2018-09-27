@@ -1,5 +1,5 @@
 <template>
-    <div class="row">列表页</div>
+    <div></div>
 </template>
 
 <script>

@@ -42,17 +42,6 @@
       <span class="white--text">&copy; 2017</span>
     </v-footer>
   </v-app>
-  <!--<div class="container">-->
-  <!--&lt;!&ndash;公共头部&ndash;&gt;-->
-  <!--<Header></Header>-->
-
-  <!--&lt;!&ndash; route outlet &ndash;&gt;-->
-  <!--&lt;!&ndash; component matched by the route will render here &ndash;&gt;-->
-  <!--<router-view></router-view>-->
-
-  <!--&lt;!&ndash;公共底部&ndash;&gt;-->
-  <!--<Footer></Footer>-->
-  <!--</div>-->
 </template>
 
 <script>

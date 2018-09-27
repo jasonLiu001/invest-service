@@ -2,12 +2,12 @@
   <v-app>
 
     <v-bottom-nav :active.sync="bottomNav" :value="true" fixed app absolute color="transparent">
-      <v-btn color="teal" flat value="recent" @click="goProfit">
+      <v-btn color="teal" flat value="profit" @click="goProfit">
         <span>Profit</span>
         <v-icon>search</v-icon>
       </v-btn>
 
-      <v-btn color="teal" flat value="favorites" @click="goAbout">
+      <v-btn color="teal" flat value="about" @click="goAbout">
         <span>About</span>
         <v-icon>person</v-icon>
       </v-btn>
@@ -40,7 +40,7 @@
     name: 'app',
     data() {
       return {
-        bottomNav: 'recent',
+        bottomNav: 'profit',
         drawer: false,
         msg: 'Welcome to Your Vue.js App'
       }

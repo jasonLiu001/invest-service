@@ -9,6 +9,6 @@
 </head>
 <body>
 <div id="main"></div>
-<script th:src="@{/dist/build.js}"></script>
+<script th:src="@{/dist/build.js(v=${#dates.format(execInfo.now,'yyyyMMddHHmmss')})}"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <template>
-    <div>Profit</div>
+    <div>查询</div>
 </template>
 
 <script>

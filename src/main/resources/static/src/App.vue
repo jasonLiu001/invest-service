@@ -14,12 +14,12 @@
           </v-list-tile-content>
         </v-list-tile>
 
-        <v-list-tile @click.stop="goProfit">
+        <v-list-tile @click.stop="goAbout">
           <v-list-tile-action>
             <v-icon>contact_mail</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Contact</v-list-tile-title>
+            <v-list-tile-title>关于</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
 
@@ -72,10 +72,17 @@
       }
     },
     methods: {
-      goProfit() {
+      closeDrawer(){
         //是否显示左侧菜单
         this.drawer = !this.drawer;
+      },
+      goProfit() {
+        this.closeDrawer();
         this.$router.push({path: 'profit'});
+      },
+      goAbout(){
+        this.closeDrawer();
+        this.$router.push({path: 'about'});
       }
     },
     props: {

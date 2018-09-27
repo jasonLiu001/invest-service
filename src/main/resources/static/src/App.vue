@@ -1,6 +1,7 @@
 <template>
   <v-app>
 
+    <!--底部tab-->
     <v-bottom-nav :active.sync="bottomNav" :value="true" fixed app absolute color="transparent">
       <v-btn color="teal" flat value="profit" @click="goProfit">
         <span>Profit</span>
@@ -13,17 +14,8 @@
       </v-btn>
     </v-bottom-nav>
 
-    <!--页面正文-->
-    <v-content>
-      <v-container fluid fill-height>
-        <v-layout justify-center align-center>
-          <v-flex text-xs-center>
-            <!--router outlet-->
-            <router-view></router-view>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-content>
+    <!--router outlet-->
+    <router-view></router-view>
 
   </v-app>
 </template>

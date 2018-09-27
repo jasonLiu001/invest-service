@@ -11,6 +11,10 @@ Vue.use(VueRouter);
 //路由
 const routes = [
   {
+    path: "/",
+    component: profit
+  },
+  {
     path: "/about",
     component: about
   },

@@ -1,5 +1,15 @@
 <template>
+
   <v-content>
+    <v-card>
+      <v-card-actions>
+        <v-checkbox label="red" color="red" value="red" hide-details></v-checkbox>
+        <v-checkbox label="red" color="red" value="red" hide-details></v-checkbox>
+        <v-checkbox label="red" color="red" value="red" hide-details></v-checkbox>
+        <v-checkbox label="red" color="red" value="red" hide-details></v-checkbox>
+      </v-card-actions>
+    </v-card>
+
     <v-container fluid fill-height>
       <v-layout justify-center align-center>
         <v-flex text-xs-center>

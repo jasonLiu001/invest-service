@@ -1,8 +1,10 @@
 <template>
   <v-app>
+    <!--router outlet-->
+    <router-view></router-view>
 
     <!--底部tab-->
-    <v-bottom-nav :active.sync="bottomNav" :value="true" fixed app absolute color="transparent">
+    <v-bottom-nav :active.sync="bottomNav" :value="true" fixed app color="transparent">
       <v-btn color="teal" flat value="profit" @click="goProfit">
         <span>Profit</span>
         <v-icon>search</v-icon>
@@ -13,9 +15,6 @@
         <v-icon>person</v-icon>
       </v-btn>
     </v-bottom-nav>
-
-    <!--router outlet-->
-    <router-view></router-view>
 
   </v-app>
 </template>

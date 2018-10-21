@@ -23,10 +23,10 @@ public class InvestDaoImpl extends BaseDao implements InvestDao {
         String sql;
         Object[] params;
         if (StringUtils.isEmpty(beforeTimeStr)) {
-            sql = "SELECT period,planType,investNumberCount,currentAccountBalance,awardMode,winMoney,status,isWin,investTime FROM `invest` WHERE planType=? ORDER BY period DESC LIMIT ?,?";
+            sql = "SELECT * FROM `invest` WHERE planType=? ORDER BY period DESC LIMIT ?,?";
             params = new Object[]{planType, (pageIndex - 1) * pageSize, pageSize};
         } else {
-            sql = "SELECT period,planType,investNumberCount,currentAccountBalance,awardMode,winMoney,STATUS,isWin,investTime FROM `invest` WHERE planType=? AND investTimestamp>='09:50:00' AND investTimestamp<=? ORDER BY period DESC LIMIT ?,?";
+            sql = "SELECT * FROM `invest` WHERE planType=? AND investTimestamp>='09:50:00' AND investTimestamp<=? ORDER BY period DESC LIMIT ?,?";
             params = new Object[]{planType, beforeTimeStr, (pageIndex - 1) * pageSize, pageSize};
         }
         List<InvestInfo> list = rewardJdbcTemplate.query(sql, params, new BeanPropertyRowMapper<>(InvestInfo.class));
@@ -53,11 +53,11 @@ public class InvestDaoImpl extends BaseDao implements InvestDao {
         String sql;
         Object[] params;
         if (beforeTimeStr.equals("22:00:00")) {//截止22点前
-            sql = "SELECT R1.period,R1.planType,R1.investNumberCount,R1.currentAccountBalance,R1.winMoney,R1.isWin,R1.status,R1.investTime FROM (SELECT A.investDate,MAX(A.period) p1 FROM (SELECT * FROM invest R WHERE R.investTimestamp>='09:50:00' AND R.`investTimestamp`<=?) A\n" +
+            sql = "SELECT R1.* FROM (SELECT A.investDate,MAX(A.period) p1 FROM (SELECT * FROM invest R WHERE R.investTimestamp>='09:50:00' AND R.`investTimestamp`<=?) A\n" +
                     "GROUP BY A.investDate) L1 LEFT JOIN invest R1 ON L1.p1=R1.period WHERE R1.`planType`=? ORDER BY L1.p1 DESC LIMIT ?,?";
             params = new Object[]{beforeTimeStr, planType, (pageIndex - 1) * pageSize, pageSize};
         } else {
-            sql = "SELECT R1.period,R1.planType,R1.investNumberCount,R1.currentAccountBalance,R1.winMoney,R1.isWin,R1.status,R1.investTime FROM (SELECT A.investDate,MAX(A.period) p1 FROM (SELECT * FROM invest R WHERE R.`investTimestamp`<=?) A\n" +
+            sql = "SELECT R1.* FROM (SELECT A.investDate,MAX(A.period) p1 FROM (SELECT * FROM invest R WHERE R.`investTimestamp`<=?) A\n" +
                     "GROUP BY A.investDate) L1 LEFT JOIN invest R1 ON L1.p1=R1.period WHERE R1.`planType`=? ORDER BY L1.p1 DESC LIMIT ?,?";
             params = new Object[]{beforeTimeStr, planType, (pageIndex - 1) * pageSize, pageSize};
         }

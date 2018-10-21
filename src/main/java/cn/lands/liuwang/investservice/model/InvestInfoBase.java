@@ -13,6 +13,11 @@ public class InvestInfoBase {
     private int status;
     private int isWin;
     private Date investTime;
+    private String investTimestamp;
+    private String investDate;
+    private int isUseReverseInvestNumbers;
+    private int touZhuBeiShu;
+    private double originAccountBalance;
 
     public String getPeriod() {
         return period;
@@ -92,5 +97,45 @@ public class InvestInfoBase {
 
     public void setInvestTime(Date investTime) {
         this.investTime = investTime;
+    }
+
+    public String getInvestTimestamp() {
+        return investTimestamp;
+    }
+
+    public void setInvestTimestamp(String investTimestamp) {
+        this.investTimestamp = investTimestamp;
+    }
+
+    public String getInvestDate() {
+        return investDate;
+    }
+
+    public void setInvestDate(String investDate) {
+        this.investDate = investDate;
+    }
+
+    public int getIsUseReverseInvestNumbers() {
+        return isUseReverseInvestNumbers;
+    }
+
+    public void setIsUseReverseInvestNumbers(int isUseReverseInvestNumbers) {
+        this.isUseReverseInvestNumbers = isUseReverseInvestNumbers;
+    }
+
+    public int getTouZhuBeiShu() {
+        return touZhuBeiShu;
+    }
+
+    public void setTouZhuBeiShu(int touZhuBeiShu) {
+        this.touZhuBeiShu = touZhuBeiShu;
+    }
+
+    public double getOriginAccountBalance() {
+        return originAccountBalance;
+    }
+
+    public void setOriginAccountBalance(double originAccountBalance) {
+        this.originAccountBalance = originAccountBalance;
     }
 }

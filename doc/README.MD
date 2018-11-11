@@ -8,6 +8,13 @@
 3. 开发时可以先将pom-dev.xml重命名为pom.xml得到所有的第三方包，然后拷贝到Tomcat放置第三方jar包的位置，上线时再用另一个pom.xml生成体积小的war包部署到线上
 > 站点首页路径： `http://localhost:8080/service/web/index`
 
+开发环境配置参考   
+配置开发运行环境
+![运行环境配置](https://note.youdao.com/yws/public/resource/a238736788faffb35352a92fcefde4aa/xmlnote/31984B14E366447CAB932937E6DEA105/21011)    
+
+添加生成的包和虚拟路径
+![添加包](https://note.youdao.com/yws/public/resource/a238736788faffb35352a92fcefde4aa/xmlnote/3D118B3568BC4832838F15D7C0C2460E/21014)
+
 ### 前台页面开发要求
 1. 启动Tomcat站点
 2. 运行cmd窗口，切换到static目录下运行`npm run dev`启动`webpack`的`watch`功能，保存cmd窗口一直打开状态，组件修改后，脚本会立即生效

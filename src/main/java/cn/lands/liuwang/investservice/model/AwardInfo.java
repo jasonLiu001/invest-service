@@ -1,12 +1,24 @@
 package cn.lands.liuwang.investservice.model;
 
+import java.util.Date;
+
 /**
  * 开奖号码
  */
 public class AwardInfo {
     private String period;
     private String openNumber;
-    private String openTime;
+    private Date openTime;
+    private Date createdTime;
+    private int updateStatus;
+
+    public int getUpdateStatus() {
+        return updateStatus;
+    }
+
+    public void setUpdateStatus(int updateStatus) {
+        this.updateStatus = updateStatus;
+    }
 
     public String getPeriod() {
         return period;
@@ -24,11 +36,20 @@ public class AwardInfo {
         this.openNumber = openNumber;
     }
 
-    public String getOpenTime() {
+    public Date getOpenTime() {
         return openTime;
     }
 
-    public void setOpenTime(String openTime) {
+    public void setOpenTime(Date openTime) {
         this.openTime = openTime;
     }
+
+    public Date getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
+    }
+
 }

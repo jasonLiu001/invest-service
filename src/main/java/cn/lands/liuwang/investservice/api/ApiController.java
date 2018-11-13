@@ -8,12 +8,12 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -243,45 +243,15 @@ public class ApiController extends BaseController {
     }
 
     @RequestMapping(value = "updateNextPeriodOpenNumber", method = RequestMethod.POST, consumes = {"application/*"})
-    public JsonResult updateNextPeriodOpenNumber(@Valid AwardInfo awardInfo, BindingResult bindingResult) {
+    public JsonResult updateNextPeriodOpenNumber(String period) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
-        jsonResult.setData(awardInfo);
-        List<AwardInfo> awardInfoList = new ArrayList<>();
+        jsonResult.setData(new AwardInfo());
         try {
-            Document doc = Jsoup.connect("https://www.km28.com/lottery-gp/cqssc.html").get();
-            String openDateText = doc.select("div.r-box.fl.clearfix>div.padding>span:eq(1)").first().html();
-            String[] openDateArr = openDateText.split("：");
-            if (openDateArr.length < 2) {
-                jsonResult.setData(awardInfoList);
-                return jsonResult;
-            }
-            Elements tables = doc.select("table.tac.fl");
-            for (Element table : tables) {
-                Elements rows = table.select("tbody tr");
-                for (Element row : rows) {
-                    Elements columns = row.select("tr td");
-                    if (columns.size() == 3 && !columns.get(0).html().equals("")) {
-                        String period = columns.get(0).html();
-                        String openTime = columns.get(1).html();
-                        String openNumber = columns.get(2).html().replaceAll("\\s*", "");
-
-                        if (period.length() == 2) {
-                            period = openDateArr[1].replaceAll("-", "") + "-0" + period;
-                        }
-
-                        openTime = openDateArr[1] + " " + openTime + ":00";
-
-                        AwardInfo awardModel = new AwardInfo();
-                        awardModel.setPeriod(period);
-                        awardModel.setOpenTime(openTime);
-                        awardModel.setOpenNumber(openNumber);
-                        awardInfoList.add(awardModel);
-                    }
-                }
-            }
+            List<AwardInfo> awardInfoList = new ArrayList<>();
+            awardService.getAwardInfoList(awardInfoList);
 
             Optional<AwardInfo> optionalAwardInfo = awardInfoList.stream()
-                    .filter(a -> a.getPeriod().equals(awardInfo.getPeriod()))
+                    .filter(a -> a.getPeriod().equals(period))
                     .peek(System.out::println)
                     .findFirst();
 
@@ -291,6 +261,22 @@ public class ApiController extends BaseController {
                 awardService.saveAwardInfo(latestAwardInfo);
             }
 
+        } catch (Exception ex) {
+            jsonResult.setStatus(JsonStatus.FAILED);
+            jsonResult.setMessage(ex.getMessage());
+            jsonResult.setData(new AwardInfo());
+            logger.error(ex);
+        }
+        return jsonResult;
+    }
+
+    @RequestMapping(value = "getOpenNumberList", method = RequestMethod.GET)
+    public JsonResult getOpenNumberList() {
+        JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
+        try {
+            List<AwardInfo> awardInfoList = new ArrayList<>();
+            awardService.getAwardInfoList(awardInfoList);
+            jsonResult.setData(awardInfoList);
         } catch (Exception ex) {
             jsonResult.setStatus(JsonStatus.FAILED);
             jsonResult.setMessage(ex.getMessage());

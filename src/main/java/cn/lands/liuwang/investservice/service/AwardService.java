@@ -2,6 +2,7 @@ package cn.lands.liuwang.investservice.service;
 
 import cn.lands.liuwang.investservice.model.AwardInfo;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface AwardService {
@@ -11,4 +12,6 @@ public interface AwardService {
     List<AwardInfo> findAwardInfoList(int pageIndex, int pageSize);
 
     boolean saveAwardInfo(AwardInfo awardInfo);
+
+    void getAwardInfoList(List<AwardInfo> awardInfoList) throws IOException;
 }

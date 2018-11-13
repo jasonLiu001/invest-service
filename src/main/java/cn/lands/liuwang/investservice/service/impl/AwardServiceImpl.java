@@ -18,4 +18,9 @@ public class AwardServiceImpl extends BaseService implements AwardService {
     public List<AwardInfo> findAwardInfoList(int pageIndex, int pageSize) {
         return awardDao.findAwardInfoList(pageIndex, pageSize);
     }
+
+    @Override
+    public boolean saveAwardInfo(AwardInfo awardInfo) {
+        return awardDao.saveAwardInfo(awardInfo);
+    }
 }

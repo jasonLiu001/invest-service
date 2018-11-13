@@ -23,4 +23,11 @@ public class AwardDaoImpl extends BaseDao implements AwardDao {
             return null;
         }
     }
+
+    @Override
+    public boolean saveAwardInfo(AwardInfo awardInfo) {
+        int effectRowCount = rewardJdbcTemplate.update("INSERT INTO award(period,openNumber,openTime) VALUES(?,?,?)",
+                awardInfo.getPeriod(), awardInfo.getOpenNumber(), awardInfo.getOpenTime());
+        return effectRowCount > 0;
+    }
 }

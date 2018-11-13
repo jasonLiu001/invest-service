@@ -12,4 +12,6 @@ public interface AwardDao {
      * 查询开奖号码
      */
     List<AwardInfo> findAwardInfoList(int pageIndex, int pageSize);
+
+    boolean saveAwardInfo(AwardInfo awardInfo);
 }

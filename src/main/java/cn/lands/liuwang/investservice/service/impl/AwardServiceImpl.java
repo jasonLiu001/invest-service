@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +34,8 @@ public class AwardServiceImpl extends BaseService implements AwardService {
     }
 
     @Override
-    public void getAwardInfoList(List<AwardInfo> awardInfoList) throws IOException {
+    public List<AwardInfo> getAwardInfoList() throws IOException {
+        List<AwardInfo> awardInfoList = new ArrayList<>();
         Document doc = Jsoup.connect("https://www.km28.com/lottery-gp/cqssc.html").get();
         String openDateText = doc.select("div.r-box.fl.clearfix>div.padding>span:eq(1)").first().html();
         String[] openDateArr = openDateText.split("：");
@@ -71,5 +73,7 @@ public class AwardServiceImpl extends BaseService implements AwardService {
                 }
             }
         }
+
+        return awardInfoList;
     }
 }

@@ -8,6 +8,7 @@
    > 方法2：移除`pom.xml`中的`<scope>provided</scope>`配置
 3. 开发时可以先将`pom-dev.xml`重命名为`pom.xml`得到所有的第三方包，然后拷贝到`Tomcat`放置第三方`jar`包的位置，上线时再用另一个`pom.xml`生成体积小的war包部署到线上
 > 站点首页路径： `http://localhost:8080/service/web/index`
+4. 需要修改`application.properties`中的配置为`dev`，默认不会走`dev`的配置
 
 开发环境配置参考   
 配置开发运行环境

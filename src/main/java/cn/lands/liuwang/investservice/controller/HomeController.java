@@ -27,4 +27,12 @@ public class HomeController extends BaseController {
     public String Login() {
         return "login";
     }
+
+    /**
+     * echarts demo页
+     */
+    @RequestMapping(value = "/echarts", method = RequestMethod.GET)
+    public String Echarts() {
+        return "echarts";
+    }
 }

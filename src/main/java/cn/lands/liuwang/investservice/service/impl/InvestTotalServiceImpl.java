@@ -13,8 +13,8 @@ public class InvestTotalServiceImpl extends BaseService implements InvestTotalSe
      * 查询所有的投注记录
      */
     @Override
-    public List<InvestTotalInfo> findInvestTotalInfoList(int pageIndex, int pageSize, int planType) {
-        return investTotalDao.findInvestTotalInfoList(pageIndex, pageSize, planType);
+    public List<InvestTotalInfo> findInvestTotalInfoList(int pageIndex, int pageSize, int planType, String beforeTimeStr) {
+        return investTotalDao.findInvestTotalInfoList(pageIndex, pageSize, planType, beforeTimeStr);
     }
 
     /**

@@ -3,17 +3,12 @@ package cn.lands.liuwang.investservice.api;
 import cn.lands.liuwang.investservice.controller.BaseController;
 import cn.lands.liuwang.investservice.model.*;
 import cn.lands.liuwang.investservice.model.query.*;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -52,14 +47,28 @@ public class ApiController extends BaseController {
     }
 
     @RequestMapping(value = "findInvestTotalInfoList", method = RequestMethod.POST)
-    public JsonResult findInvestTotalInfoList(@Valid QueryListBase queryListBase, BindingResult bindingResult) {
+    public JsonResult findInvestTotalInfoList(@Valid QueryListBeforeTime queryListBeforeTime, BindingResult bindingResult) {
+        JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
+        try {
+            List<InvestTotalInfo> list = investTotalService.findInvestTotalInfoList(queryListBeforeTime.getPageIndex(), queryListBeforeTime.getPageSize(), queryListBeforeTime.getPlanType(), queryListBeforeTime.getBeforeTimeStr());
+            jsonResult.setData(list);
+        } catch (Exception ex) {
+            jsonResult.setStatus(JsonStatus.FAILED);
+            jsonResult.setMessage(ex.getMessage());
+            logger.error(ex);
+        }
+        return jsonResult;
+    }
+
+    @RequestMapping(value = "findAllInvestTotalInfoList", method = RequestMethod.POST)
+    public JsonResult findAllInvestTotalInfoList(@Valid QueryListBase queryListBase, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         try {
             List<InvestTotalListInfo> resultList = new ArrayList<InvestTotalListInfo>();
-            List<InvestTotalInfo> plan01List = investTotalService.findInvestTotalInfoList(queryListBase.getPageIndex(), queryListBase.getPageSize(), 1);
-            List<InvestTotalInfo> plan02List = investTotalService.findInvestTotalInfoList(queryListBase.getPageIndex(), queryListBase.getPageSize(), 2);
-            List<InvestTotalInfo> plan03List = investTotalService.findInvestTotalInfoList(queryListBase.getPageIndex(), queryListBase.getPageSize(), 3);
-            List<InvestTotalInfo> plan04List = investTotalService.findInvestTotalInfoList(queryListBase.getPageIndex(), queryListBase.getPageSize(), 4);
+            List<InvestTotalInfo> plan01List = investTotalService.findInvestTotalInfoList(queryListBase.getPageIndex(), queryListBase.getPageSize(), 1, null);
+            List<InvestTotalInfo> plan02List = investTotalService.findInvestTotalInfoList(queryListBase.getPageIndex(), queryListBase.getPageSize(), 2, null);
+            List<InvestTotalInfo> plan03List = investTotalService.findInvestTotalInfoList(queryListBase.getPageIndex(), queryListBase.getPageSize(), 3, null);
+            List<InvestTotalInfo> plan04List = investTotalService.findInvestTotalInfoList(queryListBase.getPageIndex(), queryListBase.getPageSize(), 4, null);
             //期号列表
             List<String> periodList = plan01List.stream().map(InvestTotalInfo::getPeriod).collect(Collectors.toList());
             periodList.forEach(period -> {

@@ -5,6 +5,7 @@ import cn.lands.liuwang.investservice.dao.InvestTotalDao;
 import cn.lands.liuwang.investservice.model.InvestTotalInfo;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -14,9 +15,16 @@ public class InvestTotalDaoImpl extends BaseDao implements InvestTotalDao {
      * 查询所有的投注记录
      */
     @Override
-    public List<InvestTotalInfo> findInvestTotalInfoList(int pageIndex, int pageSize, int planType) {
-        String sql = "SELECT t.* FROM invest_total t WHERE t.planType=? ORDER BY t.`period` DESC LIMIT ?,?";
-        Object[] params = new Object[]{planType, (pageIndex - 1) * pageSize, pageSize};
+    public List<InvestTotalInfo> findInvestTotalInfoList(int pageIndex, int pageSize, int planType, String beforeTimeStr) {
+        String sql;
+        Object[] params;
+        if (StringUtils.isEmpty(beforeTimeStr)) {
+            sql = "SELECT t.* FROM invest_total t WHERE t.planType=? ORDER BY t.`period` DESC LIMIT ?,?";
+            params = new Object[]{planType, (pageIndex - 1) * pageSize, pageSize};
+        } else {
+            sql = "SELECT * FROM `invest_total` WHERE planType=? AND investTimestamp>='09:50:00' AND investTimestamp<=? ORDER BY period DESC LIMIT ?,?";
+            params = new Object[]{planType, beforeTimeStr, (pageIndex - 1) * pageSize, pageSize};
+        }
         List<InvestTotalInfo> list = rewardJdbcTemplate.query(sql, params, new BeanPropertyRowMapper<>(InvestTotalInfo.class));
         if (list.size() > 0) {
             return list;

@@ -251,7 +251,7 @@ public class ApiController extends BaseController {
         return jsonResult;
     }
 
-    @RequestMapping(value = "updateNextPeriodOpenNumber", method = RequestMethod.POST, consumes = {"application/*"})
+    @RequestMapping(value = "updateNextPeriodOpenNumber", method = RequestMethod.POST)
     public JsonResult updateNextPeriodOpenNumber(String period, int updateStatus) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         jsonResult.setData(new AwardInfo());

@@ -254,7 +254,7 @@ public class ApiController extends BaseController {
     @RequestMapping(value = "updateNextPeriodOpenNumber", method = RequestMethod.POST)
     public JsonResult updateNextPeriodOpenNumber(String period, int updateStatus) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
-        jsonResult.setData(new AwardInfo());
+        jsonResult.setData(-1);
         try {
             List<AwardInfo> awardInfoList = awardService.getAwardInfoList(AwardSourceSite.km28_com);
             Optional<AwardInfo> optionalAwardInfo = awardInfoList.stream()

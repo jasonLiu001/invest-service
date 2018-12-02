@@ -41,27 +41,12 @@ public class AwardInfo {
         return openTime;
     }
 
-    /**
-     * 时间格式化
-     *
-     * @return
-     */
-    public String getOpenTimeStringFormat() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return sdf.format(openTime);
-    }
-
     public void setOpenTime(Date openTime) {
         this.openTime = openTime;
     }
 
     public Date getCreatedTime() {
         return createdTime;
-    }
-
-    public String getCreateTimeStringFormat() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return sdf.format(createdTime);
     }
 
     public void setCreatedTime(Date createdTime) {

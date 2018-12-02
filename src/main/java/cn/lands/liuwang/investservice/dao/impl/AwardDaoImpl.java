@@ -6,6 +6,7 @@ import cn.lands.liuwang.investservice.model.AwardInfo;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,8 +27,9 @@ public class AwardDaoImpl extends BaseDao implements AwardDao {
 
     @Override
     public boolean saveAwardInfo(AwardInfo awardInfo) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         int effectRowCount = rewardJdbcTemplate.update("INSERT INTO award(period,openNumber,openTime,createdTime,updateStatus) VALUES(?,?,?,now(),?)",
-                awardInfo.getPeriod(), awardInfo.getOpenNumber(), awardInfo.getOpenTimeStringFormat(), awardInfo.getUpdateStatus());
+                awardInfo.getPeriod(), awardInfo.getOpenNumber(), sdf.format(awardInfo.getOpenTime()), awardInfo.getUpdateStatus());
         return effectRowCount > 0;
     }
 }

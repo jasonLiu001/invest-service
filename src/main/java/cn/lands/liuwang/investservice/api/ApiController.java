@@ -252,7 +252,7 @@ public class ApiController extends BaseController {
     }
 
     @RequestMapping(value = "updateNextPeriodOpenNumber", method = RequestMethod.POST, consumes = {"application/*"})
-    public JsonResult updateNextPeriodOpenNumber(String period) {
+    public JsonResult updateNextPeriodOpenNumber(String period, int updateStatus) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         jsonResult.setData(new AwardInfo());
         try {
@@ -264,6 +264,7 @@ public class ApiController extends BaseController {
 
             if (optionalAwardInfo.isPresent()) {
                 AwardInfo latestAwardInfo = optionalAwardInfo.get();
+                latestAwardInfo.setUpdateStatus(updateStatus);
                 jsonResult.setData(latestAwardInfo);
                 awardService.saveAwardInfo(latestAwardInfo);
             }

@@ -52,8 +52,15 @@ public class AwardServiceImpl extends BaseService implements AwardService {
                         String openTime = columns.get(1).html();
                         String openNumber = columns.get(2).html().replaceAll("\\s*", "");
 
-                        if (period.length() == 2) {
-                            period = openDateArr[1].replaceAll("-", "") + "-0" + period;
+                        //这个网站的期号处理和其他网站有区别，需要特别处理，多加了一位
+                        int formatPeriod = Integer.valueOf(period);
+                        int resultPeriod = formatPeriod - 1;
+                        if (resultPeriod == 0) {
+                            resultPeriod = 120;
+                        }
+
+                        if (String.valueOf(resultPeriod).length() == 2) {
+                            period = openDateArr[1].replaceAll("-", "") + "-0" + String.valueOf(resultPeriod);
                         }
 
                         openTime = openDateArr[1] + " " + openTime + ":00";

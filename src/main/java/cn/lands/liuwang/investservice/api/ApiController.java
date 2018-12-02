@@ -256,7 +256,7 @@ public class ApiController extends BaseController {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         jsonResult.setData(new AwardInfo());
         try {
-            List<AwardInfo> awardInfoList = awardService.getAwardInfoList();
+            List<AwardInfo> awardInfoList = awardService.getAwardInfoList(AwardSourceSite.km28_com);
             Optional<AwardInfo> optionalAwardInfo = awardInfoList.stream()
                     .filter(a -> a.getPeriod().equals(period))
                     .peek(System.out::println)
@@ -279,10 +279,10 @@ public class ApiController extends BaseController {
     }
 
     @RequestMapping(value = "getOpenNumberList", method = RequestMethod.GET)
-    public JsonResult getOpenNumberList() {
+    public JsonResult getOpenNumberList(int source) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         try {
-            List<AwardInfo> awardInfoList = awardService.getAwardInfoList();
+            List<AwardInfo> awardInfoList = awardService.getAwardInfoList(source);
             jsonResult.setData(awardInfoList);
         } catch (Exception ex) {
             jsonResult.setStatus(JsonStatus.FAILED);

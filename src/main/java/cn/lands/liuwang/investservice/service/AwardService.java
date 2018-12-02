@@ -13,5 +13,5 @@ public interface AwardService {
 
     boolean saveAwardInfo(AwardInfo awardInfo);
 
-    List<AwardInfo> getAwardInfoList() throws IOException;
+    List<AwardInfo> getAwardInfoList(int source) throws IOException;
 }

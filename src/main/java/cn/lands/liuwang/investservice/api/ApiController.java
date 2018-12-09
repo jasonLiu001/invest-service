@@ -35,7 +35,7 @@ public class ApiController extends BaseController {
     public JsonResult findInvestInfoList(@Valid QueryListBeforeTime queryListBeforeTime, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         try {
-            List<InvestInfo> list = investService.findInvestInfoList(queryListBeforeTime.getPageIndex(), queryListBeforeTime.getPageSize(), queryListBeforeTime.getPlanType(), queryListBeforeTime.getBeforeTimeStr());
+            List<InvestInfo> list = investService.findInvestInfoList(queryListBeforeTime.getPageIndex(), queryListBeforeTime.getPageSize(), queryListBeforeTime.getPlanType(), queryListBeforeTime.getBeforeTimeStr(), queryListBeforeTime.getCreateTimeStr());
             jsonResult.setData(list);
         } catch (Exception ex) {
             jsonResult.setStatus(JsonStatus.FAILED);
@@ -50,7 +50,7 @@ public class ApiController extends BaseController {
     public JsonResult findInvestTotalInfoList(@Valid QueryListBeforeTime queryListBeforeTime, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         try {
-            List<InvestTotalInfo> list = investTotalService.findInvestTotalInfoList(queryListBeforeTime.getPageIndex(), queryListBeforeTime.getPageSize(), queryListBeforeTime.getPlanType(), queryListBeforeTime.getBeforeTimeStr());
+            List<InvestTotalInfo> list = investTotalService.findInvestTotalInfoList(queryListBeforeTime.getPageIndex(), queryListBeforeTime.getPageSize(), queryListBeforeTime.getPlanType(), queryListBeforeTime.getBeforeTimeStr(), queryListBeforeTime.getCreateTimeStr());
             jsonResult.setData(list);
         } catch (Exception ex) {
             jsonResult.setStatus(JsonStatus.FAILED);
@@ -65,10 +65,10 @@ public class ApiController extends BaseController {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         try {
             List<InvestTotalListInfo> resultList = new ArrayList<InvestTotalListInfo>();
-            List<InvestTotalInfo> plan01List = investTotalService.findInvestTotalInfoList(queryListBase.getPageIndex(), queryListBase.getPageSize(), 1, null);
-            List<InvestTotalInfo> plan02List = investTotalService.findInvestTotalInfoList(queryListBase.getPageIndex(), queryListBase.getPageSize(), 2, null);
-            List<InvestTotalInfo> plan03List = investTotalService.findInvestTotalInfoList(queryListBase.getPageIndex(), queryListBase.getPageSize(), 3, null);
-            List<InvestTotalInfo> plan04List = investTotalService.findInvestTotalInfoList(queryListBase.getPageIndex(), queryListBase.getPageSize(), 4, null);
+            List<InvestTotalInfo> plan01List = investTotalService.findInvestTotalInfoList(queryListBase.getPageIndex(), queryListBase.getPageSize(), 1, null, null);
+            List<InvestTotalInfo> plan02List = investTotalService.findInvestTotalInfoList(queryListBase.getPageIndex(), queryListBase.getPageSize(), 2, null, null);
+            List<InvestTotalInfo> plan03List = investTotalService.findInvestTotalInfoList(queryListBase.getPageIndex(), queryListBase.getPageSize(), 3, null, null);
+            List<InvestTotalInfo> plan04List = investTotalService.findInvestTotalInfoList(queryListBase.getPageIndex(), queryListBase.getPageSize(), 4, null, null);
             //期号列表
             List<String> periodList = plan01List.stream().map(InvestTotalInfo::getPeriod).collect(Collectors.toList());
             periodList.forEach(period -> {

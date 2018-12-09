@@ -19,8 +19,8 @@ public class InvestServiceImpl extends BaseService implements InvestService {
      * 查询 所有/一定时间返回内 购买记录
      */
     @Override
-    public List<InvestInfo> findInvestInfoList(int pageIndex, int pageSize, int planType, String beforeTimeStr) {
-        return investDao.findInvestInfoList(pageIndex, pageSize, planType, beforeTimeStr);
+    public List<InvestInfo> findInvestInfoList(int pageIndex, int pageSize, int planType, String beforeTimeStr, String createDateStr) {
+        return investDao.findInvestInfoList(pageIndex, pageSize, planType, beforeTimeStr, createDateStr);
     }
 
     @Override

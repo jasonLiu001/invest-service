@@ -15,12 +15,15 @@ public class InvestTotalDaoImpl extends BaseDao implements InvestTotalDao {
      * 查询所有的投注记录
      */
     @Override
-    public List<InvestTotalInfo> findInvestTotalInfoList(int pageIndex, int pageSize, int planType, String beforeTimeStr) {
+    public List<InvestTotalInfo> findInvestTotalInfoList(int pageIndex, int pageSize, int planType, String beforeTimeStr, String createDateStr) {
         String sql;
         Object[] params;
         if (StringUtils.isEmpty(beforeTimeStr)) {
             sql = "SELECT t.* FROM invest_total t WHERE t.planType=? ORDER BY t.`period` DESC LIMIT ?,?";
             params = new Object[]{planType, (pageIndex - 1) * pageSize, pageSize};
+        } else if (!StringUtils.isEmpty(createDateStr)) {
+            sql = "SELECT t.* FROM invest_total t WHERE t.planType=? AND investDate=? ORDER BY t.`period` DESC LIMIT ?,?";
+            params = new Object[]{planType, createDateStr, (pageIndex - 1) * pageSize, pageSize};
         } else {
             sql = "SELECT * FROM `invest_total` WHERE planType=? AND investTimestamp>='09:50:00' AND investTimestamp<=? ORDER BY period DESC LIMIT ?,?";
             params = new Object[]{planType, beforeTimeStr, (pageIndex - 1) * pageSize, pageSize};

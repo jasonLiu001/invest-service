@@ -19,18 +19,18 @@ public class InvestDaoImpl extends BaseDao implements InvestDao {
      * 查询投注记录
      */
     @Override
-    public List<InvestInfo> findInvestInfoList(int pageIndex, int pageSize, int planType, String beforeTimeStr, String createDateStr) {
+    public List<InvestInfo> findInvestInfoList(int pageIndex, int pageSize, int planType, String beforeTimeStr, String createTimeStr) {
         String sql;
         Object[] params;
-        if (StringUtils.isEmpty(beforeTimeStr)) {
-            sql = "SELECT * FROM `invest` WHERE planType=? ORDER BY period DESC LIMIT ?,?";
-            params = new Object[]{planType, (pageIndex - 1) * pageSize, pageSize};
-        } else if (!StringUtils.isEmpty(createDateStr)) {
-            sql = "SELECT * FROM `invest` WHERE planType=? AND investDate=? ORDER BY period DESC LIMIT ?,?";
-            params = new Object[]{planType, createDateStr, (pageIndex - 1) * pageSize, pageSize};
-        } else {
+        if (!StringUtils.isEmpty(beforeTimeStr)) {
             sql = "SELECT * FROM `invest` WHERE planType=? AND investTimestamp>='09:50:00' AND investTimestamp<=? ORDER BY period DESC LIMIT ?,?";
             params = new Object[]{planType, beforeTimeStr, (pageIndex - 1) * pageSize, pageSize};
+        } else if (!StringUtils.isEmpty(createTimeStr)) {
+            sql = "SELECT * FROM `invest` WHERE planType=? AND investDate=? ORDER BY period DESC LIMIT ?,?";
+            params = new Object[]{planType, createTimeStr, (pageIndex - 1) * pageSize, pageSize};
+        } else {
+            sql = "SELECT * FROM `invest` WHERE planType=? ORDER BY period DESC LIMIT ?,?";
+            params = new Object[]{planType, (pageIndex - 1) * pageSize, pageSize};
         }
         List<InvestInfo> list = rewardJdbcTemplate.query(sql, params, new BeanPropertyRowMapper<>(InvestInfo.class));
         if (list.size() > 0) {

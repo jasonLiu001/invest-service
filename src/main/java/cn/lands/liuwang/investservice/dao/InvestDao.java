@@ -11,17 +11,17 @@ import java.util.List;
  */
 public interface InvestDao {
     /**
-     * 查询投注记录
+     * 查询投注记录 特定时间点之前的所有记录 特定某一天里的所有记录
      */
     List<InvestInfo> findInvestInfoList(int pageIndex, int pageSize, int planType, String beforeTimeStr, String createDateStr);
 
     /**
-     * 根据期号查询购买号码
+     * 根据期号查询购买号码明细
      */
     InvestInfo getInvestInfoByPeriod(int planType, String period);
 
     /**
-     * 查询 每天 特定时间点 以前最新记录
+     * 查询 每天 特定时间点 以前最新的一条记录
      *
      * @param beforeTimeStr 时间点 格式：02:00:00
      */

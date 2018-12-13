@@ -27,7 +27,7 @@ public class InvestDaoImpl extends BaseDao implements InvestDao {
             params = new Object[]{planType, beforeTimeStr, (pageIndex - 1) * pageSize, pageSize};
         } else if (!StringUtils.isEmpty(startTimeStr) && !StringUtils.isEmpty(endTimeStr)) {
             sql = "SELECT * FROM `invest` WHERE planType=? AND investTime>=? AND investTime<=? ORDER BY period DESC LIMIT ?,?";
-            params = new Object[]{planType, startTimeStr, (pageIndex - 1) * pageSize, pageSize};
+            params = new Object[]{planType, startTimeStr, endTimeStr, (pageIndex - 1) * pageSize, pageSize};
         } else {
             sql = "SELECT * FROM `invest` WHERE planType=? ORDER BY period DESC LIMIT ?,?";
             params = new Object[]{planType, (pageIndex - 1) * pageSize, pageSize};

@@ -13,7 +13,7 @@ public interface InvestDao {
     /**
      * 查询投注记录 特定时间点之前的所有记录 特定某一天里的所有记录
      */
-    List<InvestInfo> findInvestInfoList(int pageIndex, int pageSize, int planType, String beforeTimeStr, String createDateStr);
+    List<InvestInfo> findInvestInfoList(int pageIndex, int pageSize, int planType, String beforeTimeStr, String startTimeStr, String endTimeStr);
 
     /**
      * 根据期号查询购买号码明细

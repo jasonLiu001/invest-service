@@ -15,7 +15,7 @@ public class InvestTotalDaoImpl extends BaseDao implements InvestTotalDao {
      * 查询所有的投注记录
      */
     @Override
-    public List<InvestTotalInfo> findInvestTotalInfoList(int pageIndex, int pageSize, int planType, String beforeTimeStr, String startTimeStr) {
+    public List<InvestTotalInfo> findInvestTotalInfoList(int pageIndex, int pageSize, int planType, String beforeTimeStr, String startTimeStr, String endTimeStr) {
         String sql;
         Object[] params;
         if (!StringUtils.isEmpty(beforeTimeStr)) {

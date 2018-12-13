@@ -4,8 +4,19 @@ public class QueryListBeforeTime extends QueryListBase {
     //在此时间点之前
     private String beforeTimeStr;
 
-    //按记录 创建日期 过滤
+    //查询开始时间
     private String startTimeStr;
+
+    //查询结束时间
+    private String endTimeStr;
+
+    public String getEndTimeStr() {
+        return endTimeStr;
+    }
+
+    public void setEndTimeStr(String endTimeStr) {
+        this.endTimeStr = endTimeStr;
+    }
 
     public String getStartTimeStr() {
         return startTimeStr;

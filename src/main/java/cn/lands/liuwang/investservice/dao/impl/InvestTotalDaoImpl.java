@@ -21,9 +21,9 @@ public class InvestTotalDaoImpl extends BaseDao implements InvestTotalDao {
         if (!StringUtils.isEmpty(beforeTimeStr)) {
             sql = "SELECT * FROM `invest_total` WHERE planType=? AND investTimestamp>='09:50:00' AND investTimestamp<=? ORDER BY period DESC LIMIT ?,?";
             params = new Object[]{planType, beforeTimeStr, (pageIndex - 1) * pageSize, pageSize};
-        } else if (!StringUtils.isEmpty(startTimeStr)) {
-            sql = "SELECT t.* FROM invest_total t WHERE t.planType=? AND investDate=? ORDER BY t.`period` DESC LIMIT ?,?";
-            params = new Object[]{planType, startTimeStr, (pageIndex - 1) * pageSize, pageSize};
+        } else if (!StringUtils.isEmpty(startTimeStr) && !StringUtils.isEmpty(endTimeStr)) {
+            sql = "SELECT t.* FROM invest_total t WHERE t.planType=? AND t.investTime>=? AND t.investTime<=? ORDER BY t.`period` DESC LIMIT ?,?";
+            params = new Object[]{planType, startTimeStr, endTimeStr, (pageIndex - 1) * pageSize, pageSize};
         } else {
             sql = "SELECT t.* FROM invest_total t WHERE t.planType=? ORDER BY t.`period` DESC LIMIT ?,?";
             params = new Object[]{planType, (pageIndex - 1) * pageSize, pageSize};

@@ -2,7 +2,6 @@ package cn.lands.liuwang.investservice.model.query;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class JsonResult {
     //返回结果0成功
     private JsonStatus status;

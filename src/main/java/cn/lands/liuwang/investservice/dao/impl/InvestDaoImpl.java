@@ -36,7 +36,7 @@ public class InvestDaoImpl extends BaseDao implements InvestDao {
         if (list.size() > 0) {
             return list;
         } else {
-            return null;
+            return new ArrayList<>();
         }
     }
 
@@ -68,7 +68,7 @@ public class InvestDaoImpl extends BaseDao implements InvestDao {
         if (list.size() > 0) {
             return list;
         } else {
-            return null;
+            return new ArrayList<>();
         }
     }
 
@@ -112,7 +112,7 @@ public class InvestDaoImpl extends BaseDao implements InvestDao {
         if (list.size() > 0) {
             return list;
         } else {
-            return null;
+            return new ArrayList<>();
         }
     }
 }

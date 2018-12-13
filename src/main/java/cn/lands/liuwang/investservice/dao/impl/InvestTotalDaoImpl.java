@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -32,7 +33,7 @@ public class InvestTotalDaoImpl extends BaseDao implements InvestTotalDao {
         if (list.size() > 0) {
             return list;
         } else {
-            return null;
+            return new ArrayList<>();
         }
     }
 

@@ -5,14 +5,14 @@ public class QueryListBeforeTime extends QueryListBase {
     private String beforeTimeStr;
 
     //按记录 创建日期 过滤
-    private String createTimeStr;
+    private String startTimeStr;
 
-    public String getCreateTimeStr() {
-        return createTimeStr;
+    public String getStartTimeStr() {
+        return startTimeStr;
     }
 
-    public void setCreateTimeStr(String createTimeStr) {
-        this.createTimeStr = createTimeStr;
+    public void setStartTimeStr(String startTimeStr) {
+        this.startTimeStr = startTimeStr;
     }
 
     public String getBeforeTimeStr() {

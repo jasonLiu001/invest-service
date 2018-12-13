@@ -8,7 +8,7 @@ public interface InvestTotalDao {
     /**
      * 查询所有的投注记录
      */
-    List<InvestTotalInfo> findInvestTotalInfoList(int pageIndex, int pageSize, int planType, String beforeTimeStr, String createDateStr);
+    List<InvestTotalInfo> findInvestTotalInfoList(int pageIndex, int pageSize, int planType, String beforeTimeStr, String startTimeStr);
 
     /**
      * 根据期号查询购买号码

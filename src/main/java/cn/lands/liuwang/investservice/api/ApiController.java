@@ -3,6 +3,7 @@ package cn.lands.liuwang.investservice.api;
 import cn.lands.liuwang.investservice.controller.BaseController;
 import cn.lands.liuwang.investservice.model.*;
 import cn.lands.liuwang.investservice.model.query.*;
+import cn.lands.liuwang.investservice.model.stats.CorrectWrongCountInfo;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -284,6 +285,20 @@ public class ApiController extends BaseController {
         try {
             List<AwardInfo> awardInfoList = awardService.getAwardInfoList(source);
             jsonResult.setData(awardInfoList);
+        } catch (Exception ex) {
+            jsonResult.setStatus(JsonStatus.FAILED);
+            jsonResult.setMessage(ex.getMessage());
+            logger.error(ex);
+        }
+        return jsonResult;
+    }
+
+    @RequestMapping(value = "getTotalCorrectAndWrongCount", method = RequestMethod.POST)
+    public JsonResult getTotalCorrectAndWrongCount(@Valid QueryListBeforeTime queryListBeforeTime, BindingResult bindingResult) {
+        JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
+        try {
+            List<CorrectWrongCountInfo> list = statService.getTotalCorrectAndWrongCount(queryListBeforeTime);
+            jsonResult.setData(list);
         } catch (Exception ex) {
             jsonResult.setStatus(JsonStatus.FAILED);
             jsonResult.setMessage(ex.getMessage());

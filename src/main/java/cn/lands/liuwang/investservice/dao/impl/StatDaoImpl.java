@@ -15,8 +15,8 @@ public class StatDaoImpl extends BaseDao implements StatDao {
 
     @Override
     public List<CorrectWrongCountInfo> getTotalCorrectAndWrongCount(QueryListBeforeTime queryListBeforeTime) {
-        List<CorrectWrongCountInfo> correctCountInfo = rewardJdbcTemplate.query("SELECT COUNT(1) AS correctCount,t.`planType` FROM invest_total t WHERE t.`investTime`>? AND t.`investTime`<? AND t.`status`=1 AND t.`isWin`=1 GROUP BY t.`planType`", new Object[]{queryListBeforeTime.getStartTimeStr(), queryListBeforeTime.getEndTimeStr()}, new BeanPropertyRowMapper<>(CorrectWrongCountInfo.class));
-        List<CorrectWrongCountInfo> inCorrectCountInfo = rewardJdbcTemplate.query("SELECT COUNT(1) AS correctCount,t.`planType` FROM invest_total t WHERE t.`investTime`>? AND t.`investTime`<? AND t.`status`=1 AND t.`isWin`=0 GROUP BY t.`planType`", new Object[]{queryListBeforeTime.getStartTimeStr(), queryListBeforeTime.getEndTimeStr()}, new BeanPropertyRowMapper<>(CorrectWrongCountInfo.class));
+        List<CorrectWrongCountInfo> correctCountInfo = rewardJdbcTemplate.query("SELECT COUNT(1) AS correctCount,t.`planType` as planType FROM invest_total t WHERE t.`investTime`>? AND t.`investTime`<? AND t.`status`=1 AND t.`isWin`=1 GROUP BY t.`planType`", new Object[]{queryListBeforeTime.getStartTimeStr(), queryListBeforeTime.getEndTimeStr()}, new BeanPropertyRowMapper<>(CorrectWrongCountInfo.class));
+        List<CorrectWrongCountInfo> inCorrectCountInfo = rewardJdbcTemplate.query("SELECT COUNT(1) AS inCorrectCount,t.`planType` as planType FROM invest_total t WHERE t.`investTime`>? AND t.`investTime`<? AND t.`status`=1 AND t.`isWin`=0 GROUP BY t.`planType`", new Object[]{queryListBeforeTime.getStartTimeStr(), queryListBeforeTime.getEndTimeStr()}, new BeanPropertyRowMapper<>(CorrectWrongCountInfo.class));
         List<CorrectWrongCountInfo> list = new ArrayList<>();
 
         for (int i = 0; i < correctCountInfo.size(); i++) {

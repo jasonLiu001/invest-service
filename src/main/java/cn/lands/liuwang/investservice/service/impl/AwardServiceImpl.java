@@ -2,6 +2,7 @@ package cn.lands.liuwang.investservice.service.impl;
 
 import cn.lands.liuwang.investservice.dao.AwardDao;
 import cn.lands.liuwang.investservice.model.AwardInfo;
+import cn.lands.liuwang.investservice.model.query.QueryListBase;
 import cn.lands.liuwang.investservice.service.AwardService;
 import cn.lands.liuwang.investservice.service.BaseService;
 import org.jsoup.Jsoup;
@@ -24,8 +25,8 @@ public class AwardServiceImpl extends BaseService implements AwardService {
      * 查询开奖号码
      */
     @Override
-    public List<AwardInfo> findAwardInfoList(int pageIndex, int pageSize) {
-        return awardDao.findAwardInfoList(pageIndex, pageSize);
+    public List<AwardInfo> findAwardInfoList(QueryListBase listParam) {
+        return awardDao.findAwardInfoList(listParam);
     }
 
     @Override

@@ -22,7 +22,7 @@ public class ApiController extends BaseController {
     public JsonResult findAwardInfoList(@Valid QueryListBase listParam, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult(JsonStatus.OK, JsonStatus.OK.getName());
         try {
-            List<AwardInfo> list = awardService.findAwardInfoList(listParam.getPageIndex(), listParam.getPageSize());
+            List<AwardInfo> list = awardService.findAwardInfoList(listParam);
             jsonResult.setData(list);
         } catch (Exception ex) {
             jsonResult.setStatus(JsonStatus.FAILED);

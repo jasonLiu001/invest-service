@@ -59,8 +59,12 @@ public class AwardServiceImpl extends BaseService implements AwardService {
                             resultPeriod = 120;
                         }
 
-                        if (String.valueOf(resultPeriod).length() == 2) {
+                        if (String.valueOf(resultPeriod).length() == 1) {
+                            period = openDateArr[1].replaceAll("-", "") + "-00" + String.valueOf(resultPeriod);
+                        } else if (String.valueOf(resultPeriod).length() == 2) {
                             period = openDateArr[1].replaceAll("-", "") + "-0" + String.valueOf(resultPeriod);
+                        } else if (String.valueOf(resultPeriod).length() == 3) {
+                            period = openDateArr[1].replaceAll("-", "") + "-" + String.valueOf(resultPeriod);
                         }
 
                         openTime = openDateArr[1] + " " + openTime + ":00";

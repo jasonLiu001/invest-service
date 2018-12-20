@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -56,11 +57,28 @@ public class AwardServiceImpl extends BaseService implements AwardService {
                         //这个网站的期号处理和其他网站有区别，需要特别处理，多加了一位
                         int formatPeriod = Integer.valueOf(period);
                         int resultPeriod = formatPeriod - 1;
-                        if (resultPeriod == 0) {
-                            resultPeriod = 120;
-                        }
 
-                        if (String.valueOf(resultPeriod).length() == 1) {
+                        if (resultPeriod == 0) {//单独处理这个特殊情况 120的期号，肯定上前一天的时间，因为更新发生在下一天
+                            resultPeriod = 120;
+                            SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+                            Date dt = null;
+                            try {
+                                //解析时间
+                                dt = dateFormatter.parse(openDateArr[1]);
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                            }
+                            Calendar rightNow = Calendar.getInstance();
+                            rightNow.setTime(dt);
+                            rightNow.add(Calendar.DAY_OF_YEAR, -1);//日期减1天
+
+                            Date prevDay = rightNow.getTime();
+
+                            dateFormatter = new SimpleDateFormat("yyyyMMdd");
+                            String prevDayStr = dateFormatter.format(prevDay);
+
+                            period = prevDayStr + "-" + String.valueOf(resultPeriod);
+                        } else if (String.valueOf(resultPeriod).length() == 1) {
                             period = openDateArr[1].replaceAll("-", "") + "-00" + String.valueOf(resultPeriod);
                         } else if (String.valueOf(resultPeriod).length() == 2) {
                             period = openDateArr[1].replaceAll("-", "") + "-0" + String.valueOf(resultPeriod);

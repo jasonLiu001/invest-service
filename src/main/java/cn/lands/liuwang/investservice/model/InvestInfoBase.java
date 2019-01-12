@@ -18,6 +18,10 @@ public class InvestInfoBase {
     private int isUseReverseInvestNumbers;
     private int touZhuBeiShu;
     private double originAccountBalance;
+    //关联字段 开奖号码
+    private String openNumber;
+    //关联字段 开奖时间
+    private String openTime;
 
     public String getPeriod() {
         return period;
@@ -137,5 +141,21 @@ public class InvestInfoBase {
 
     public void setOriginAccountBalance(double originAccountBalance) {
         this.originAccountBalance = originAccountBalance;
+    }
+
+    public String getOpenNumber() {
+        return openNumber;
+    }
+
+    public void setOpenNumber(String openNumber) {
+        this.openNumber = openNumber;
+    }
+
+    public String getOpenTime() {
+        return openTime;
+    }
+
+    public void setOpenTime(String openTime) {
+        this.openTime = openTime;
     }
 }

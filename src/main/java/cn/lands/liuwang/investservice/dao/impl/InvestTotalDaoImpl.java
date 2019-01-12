@@ -42,7 +42,7 @@ public class InvestTotalDaoImpl extends BaseDao implements InvestTotalDao {
      */
     @Override
     public InvestTotalInfo getInvestTotalInfoByPeriod(int planType, String period) {
-        List<InvestTotalInfo> list = rewardJdbcTemplate.query("SELECT * FROM invest_total WHERE period=? AND planType=?", new Object[]{period, planType}, new BeanPropertyRowMapper<>(InvestTotalInfo.class));
+        List<InvestTotalInfo> list = rewardJdbcTemplate.query("SELECT i.*,a.`openNumber`,a.`openTime` FROM invest_total AS i LEFT JOIN award AS a ON i.`period`=a.`period` WHERE i.period=? AND i.planType=?", new Object[]{period, planType}, new BeanPropertyRowMapper<>(InvestTotalInfo.class));
         if (list.size() > 0) {
             return list.get(0);
         } else {

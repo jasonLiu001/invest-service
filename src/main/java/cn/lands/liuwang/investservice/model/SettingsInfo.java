@@ -5,6 +5,9 @@ public class SettingsInfo {
     private String key;
     private String value;
     private String desc;
+    private int orderId;
+    private String group;
+    private int isEnable;
 
     public int getId() {
         return id;
@@ -36,5 +39,29 @@ public class SettingsInfo {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
+    public int getIsEnable() {
+        return isEnable;
+    }
+
+    public void setIsEnable(int isEnable) {
+        this.isEnable = isEnable;
     }
 }

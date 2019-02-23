@@ -8,6 +8,7 @@ public class SettingsInfo {
     private int orderId;
     private String group;
     private int isEnable;
+    private String remark;
 
     public int getId() {
         return id;
@@ -63,5 +64,13 @@ public class SettingsInfo {
 
     public void setIsEnable(int isEnable) {
         this.isEnable = isEnable;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

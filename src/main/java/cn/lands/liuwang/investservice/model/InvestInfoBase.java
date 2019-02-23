@@ -22,6 +22,11 @@ public class InvestInfoBase {
     private String openNumber;
     //关联字段 开奖时间
     private String openTime;
+    //模拟投注方案1
+    private int isMockPlan01;
+    //是否是真实投注
+    private int isRealInvest;
+
 
     public String getPeriod() {
         return period;
@@ -157,5 +162,21 @@ public class InvestInfoBase {
 
     public void setOpenTime(String openTime) {
         this.openTime = openTime;
+    }
+
+    public int getIsMockPlan01() {
+        return isMockPlan01;
+    }
+
+    public void setIsMockPlan01(int isMockPlan01) {
+        this.isMockPlan01 = isMockPlan01;
+    }
+
+    public int getIsRealInvest() {
+        return isRealInvest;
+    }
+
+    public void setIsRealInvest(int isRealInvest) {
+        this.isRealInvest = isRealInvest;
     }
 }
